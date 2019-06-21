@@ -1,0 +1,490 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	/* background-image: url(../img/QQ图片20190525164110.jpg); */
+	background-color: #EEEEEE;
+	background-position: center 0;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.head {
+	height: 60px;
+	width: 100%;
+	/* position: fixed; */
+}
+
+.main {
+	width: 1200px;
+	min-height: 1600px;
+	/* background-color: #66CDAA; */
+	background-color: rgba(255, 255, 255, 0.6);
+	margin: auto;
+	margin-top: 20px;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.foot {
+	width: 100%;
+	height: 100px;
+	margin-top: 10px;
+	background: rgba(255, 255, 255, 0.7);
+}
+
+.upload {
+	width: 800px;
+	min-height: 1600px;
+	/* margin-top: 10px; */
+	background-color: rgba(255, 255, 255, 0.2);
+	float: left;
+	border-radius: 5px;
+}
+
+.box1 {
+	width: 385px;
+	height: 500px;
+	background-color: rgba(255, 255, 255, 0.6);
+	float: right;
+	border-radius: 5px;
+}
+
+.box2 {
+	margin-top: 20px;
+	width: 385px;
+	height: 450px;
+	background-color: rgba(255, 255, 255, 0.6);
+	float: right;
+	border-radius: 5px;
+}
+
+.box3 {
+	margin-top: 20px;
+	width: 385px;
+	height: 400px;
+	background-color: rgba(255, 255, 255, 0.6);
+	float: right;
+	border-radius: 5px;
+}
+
+
+
+/* 导航栏 */
+.head ul {
+	list-style-type: none;
+	margin-top: 0;
+	/* width: 100%; */
+	padding: 15px;
+	text-align: right;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	border-radius: 15px;
+
+}
+
+li {
+	display: inline;
+	margin: 10px 15px;
+
+}
+
+li a {
+	color: #909399;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+li a:hover {
+	color: black;
+}
+
+.drop-span {
+	padding: 16px;
+	font-size: 14px;
+	color: #909399;
+
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	margin-top: 13px;
+	/* width: 100px; */
+	display: none;
+	position: absolute;
+	/* background-color: rgba(255, 255, 255, 0.1); */
+	/* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+	border-radius: 5px;
+}
+
+/* 下拉菜单的链接 */
+.dropdown-content a {
+	text-align: center;
+	/* color: #909399; */
+	padding: 10px 5px;
+	width: 90px;
+	text-decoration: none;
+	display: block;
+	/* 		background-color: rgba(255, 255, 255, 0.1);
+			background-color: rgba(255, 255, 255, 0); */
+	border-color: rgba(64, 158, 255, 0.3);
+	color: mediumaquamarine;
+	line-height: 1;
+}
+
+.search-div {
+	/* border-color: rgba(64, 158, 255, 0.3); */
+	/* background-color: #66CDAA; */
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	margin-top: 5px;
+	width: 100px;
+}
+
+/* 鼠标移上去后修改下拉菜单链接颜色 */
+.dropdown-content a:hover {
+	background-color: rgba(58, 142, 230, 0.2);
+	color: white;
+}
+
+/* 在鼠标移上去后显示下拉菜单 */
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* 当下拉内容显示后修改下拉按钮的背景颜色 */
+.dropdown:hover .drop-span {
+	color: black;
+}
+
+/* 脚本运行情况 */
+.box1-title {
+	width: 365px;
+	height: 20px;
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 5px;
+	/* text-align: left; */
+	padding: 10px;
+}
+
+.box1-title label {
+	float: left;
+	color: #66CDAA;
+}
+
+.script-list-right {
+	margin-top: 10px;
+	padding: 0;
+	overflow: hidden;
+	height: 450px;
+	line-height: 20px;
+}
+
+.script-list-right ul {
+	padding: 0;
+	margin: 0;
+
+}
+
+.script-list-right li {
+	padding: 0;
+	margin: 0;
+}
+
+.script-execution {
+	width: 385px;
+	text-align: left;
+	font-size: 14px;
+	color: #778899;
+	margin-top: 10px;
+}
+
+.script-execution a {
+	padding: 0;
+	text-decoration: none;
+	color: #1E90FF;
+}
+
+/* 图标信息 */
+.fa-times {
+	color: #FF0000;
+}
+
+.fa-times-circle-o {
+	color: #FF0000;
+}
+
+.fa-check-circle-o {
+	color: #32CD32;
+}
+
+.fa-exclamation-circle {
+	color: #FF8C00;
+}
+
+/* 评论 */
+.comments {
+	width: 385px;
+	height: 380px;
+	margin: 0 auto;
+	line-height: 26px;
+	font-size: 12px;
+	overflow: hidden;
+	text-align: left;
+}
+
+.comments ul {
+	padding: 0;
+	margin: 0;
+}
+
+.comments li {
+	margin: 0;
+	padding: 0;
+}
+
+.comments-info {
+	width: 375px;
+	height: 90px;
+	text-align: left;
+	margin-top: 2px;
+	margin-left: 10px;
+}
+
+.comments-info hr {
+	margin-top: 10px;
+}
+
+.comments-name {
+	color: #1E90FF;
+}
+
+.comments-time {
+	color: #D8D8D8;
+	float: right;
+	margin-right: 10px;
+}
+
+.comments-detail {
+	width: 375px;
+	height: 50px;
+	color: #484848;
+	overflow: hidden;
+
+}
+
+/* 代理展示 */
+/* .box-title {
+	width: 385px;
+	height: 20px;
+	text-align: left;
+	background-color: rgba(255, 255, 255, 0.4);
+	border-radius: 5px;
+	text-align: left;
+	padding: 10px;
+	color: #66CDAA;
+} */
+
+.myscroll {
+	width: 385px;
+	height: 350px;
+	margin: 0 auto;
+	line-height: 26px;
+	font-size: 12px;
+	overflow: hidden;
+	text-align: left;
+}
+
+.myscroll ul {
+	text-align: left;
+}
+
+.myscroll li {
+	height: 26px;
+	margin-left: 25px;
+	/* display: block; */
+}
+
+.attention fieldset {
+	width: 740px;
+	/* height: 200px; */
+	margin: 10px 10px;
+	border: 1px solid #1E90FF;
+	padding: 20px 20px;
+}
+
+.attention legend {
+	font-size: 20px;
+	color: #1E90FF;
+}
+
+.script-format label {
+	font-size: 14px;
+	color: #909399;
+	margin-top: 10px;
+}
+
+.script-type-btn {
+	margin-top: 20px;
+}
+
+.script-type-btn label {
+	font-size: 14px;
+	width: 740px;
+}
+
+.script-type-btn button {
+	padding: 3px;
+	height: 30px;
+	margin: 0;
+	border: 1px solid #1E90FF;
+	background-color: #1E90FF;
+	color: white;
+	border-radius: 3px;
+}
+
+.data-format {
+	display: none;
+	width: 740px;
+}
+
+.data-format.active {
+	display: block;
+}
+
+pre code.json {
+	width: 740px;
+	margin: 0;
+	padding: 0;
+}
+
+
+button.active {
+
+	background-color: #32CD32;
+	border: 1px solid #32CD32;
+	outline: none;
+}
+
+/* 上传部分 */
+div.upload-script {
+	width: 740px;
+}
+
+.upload-script-label{
+	margin-left: 20px;
+}
+
+
+.upload-script label.send-email{
+	font-size: 12px;
+	color: #909399;
+}
+
+.upload-script button {
+	margin-top: 10px;
+	margin-left: 20px;
+	padding: 10px;
+	color: white;
+	border: 1px solid #1E90FF;
+	background-color: #1E90FF;
+	border-radius: 3px;
+}
+
+
+form.upload-script fieldset{
+	width: 740px;
+	/* height: 200px; */
+	margin: 10px 10px;
+	border: 1px solid #1E90FF;
+	padding: 20px 20px;
+	display: none;
+}
+
+
+form.upload-script fieldset.active{
+	display: block;
+}
+
+.script-files{
+	margin-left: 10px;
+}
+
+
+form.upload-script legend {
+	font-size: 20px;
+	color: #1E90FF;
+}
+
+.script-show{
+	width: 740px;
+}
+
+#script-type{
+	margin-top: 10px;
+	width: 200px;
+	height: 30px;
+	
+}
+
+#script-type option{
+	font-size: 14px;
+}
+
+input{
+	margin-top: 10px;
+	border: 0.5px solid #1E90FF;
+	border-radius: 3px;
+	padding: 5px 5px;
+	width: 400px;
+}
+
+#checkbox{
+	width: 20px;
+}
+.form-data{
+	border: 0.5px solid #1E90FF;
+	border-radius: 3px;
+	padding: 3px;
+	width: 620px;
+	margin-top: 10px;
+}
+
+.upload_success{
+	width: 800px;
+	min-height: 1600px;
+	/* margin-top: 10px; */
+	background-color: rgba(255, 255, 255, 0.2);
+	float: left;
+	border-radius: 5px;
+	text-align: center;
+	padding-top: 30px;
+}
+
+#success_label1{
+	font-size: 45px;
+	color: #32CD32;
+}
+#success_label2{
+	font-size: 12px;
+	color: #66CDAA;
+}
+#success_label3{
+	padding: 20px;
+	font-size: 16px;
+	color: #1E90FF;
+}
+#success_span{
+	font: 30px;
+	color: red;
+}
