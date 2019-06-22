@@ -1,21 +1,20 @@
 {% load staticfiles %}
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>脚本上传成功</title>
+		<title>80s电影网</title>
 		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="{%  static '/css/upload.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static '/css/scriptlist.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static '/font-awesome-4.7.0/css/font-awesome.min.css' %}" />
-		<script src="{% static '/js/upload.js' %}"></script>
+		<script src="{% static '/js/scriptlist.js' %}"></script>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
-		<script src="{% static /js/scroll.js %}"></script>
+		<script src="{% static '/js/scroll.js' %}"></script>
 		<script>
 			hljs.initHighlightingOnLoad();
-			$(document).ready(function() {
-				$("#script-test-btn").click(function() {
+			$(document).ready(function(){
+				$("#script-test-btn").click(function(){
 					$(".script-result").show();
 				})
 			})
@@ -35,17 +34,6 @@
 					rowHeight: 30 //li的高度
 				});
 			});
-
-			var t = 5;
-			setInterval("refer()", 1000);
-
-			function refer() {
-				if (t == 0) {
-					location = "/"
-				}
-				document.getElementById('success_span').innerHTML = t; // 显示倒计时 
-				t--;
-			}
 		</script>
 	</head>
 	<body>
@@ -69,13 +57,107 @@
 			</ul>
 		</div>
 		<div class="main">
-			<div class="upload_success">
-				<label id="success_label1">脚本上传成功！</label><br />
-				<label id="success_label2">请耐心等待管理员审核...</label><br />
-				<label id="success_label3">
-					<span id="success_span"></span>
-					秒后跳转到首页
-					</label>
+			<div class="script-list">
+				<div class="script-type">
+					<div class="script-type-title">
+						<label>脚本类型</label>
+					</div>
+					<div class="script-type-list1">
+                        {% for spider_type in spider_type_list %}
+                            <a href="/" class="script-tag">{{ spider_type.name }}</a>
+                        {% endfor %}
+					</div>
+					<div class="script-type-title">
+						<label>特殊网站脚本</label>
+					</div>
+					<div class="script-type-list2">
+						<a href="/" class="script-tag">B站</a>
+						<a href="/" class="script-tag">优酷</a>
+						<a href="/" class="script-tag">起点中文网</a>
+						<a href="/" class="script-tag">QQ音乐</a>
+						<a href="/" class="script-tag">爱奇艺</a>
+						<a href="/" class="script-tag">逆风学习网</a>
+					</div>
+				</div>
+				<div class="script-list-top">
+					<label>脚本详情&gt;&gt;&gt;</label>
+				</div>
+				<div class="script-detail-title">
+					{{ spider.website_name }}
+				</div>
+				<div class="script-detail-info">
+					<label>分类：</label>
+					<a href="/">{{ spider.spider_type.name }}</a>
+					<label id="author">作者：</label>
+					<label>{{ spider.author }}</label>
+					<label id="viewcount"><i class="fa fa-eye" aria-hidden="true"></i>浏览：</label>
+					<label>{{ spider.view_num }}</label>
+					<label id="script-detail-info-time">{{ spider.add_time }}</label>
+				</div>
+				<pre class="script-content">
+					<code class="python">
+                     {{ spider_content }}
+					</code>
+				</pre>
+				<form action="" id="script-test">
+					<fieldset>
+						<legend>脚本测试</legend>
+						<label>输入搜索词：</label>
+						<input type="text" name="wd" id="wd">
+						<button type="button"  id="script-test-btn">提交</button><br />
+						<pre class="script-result">
+							<label>测试结果如下：</label>
+							<code class="json" id="test-result">
+
+							</code>
+						</pre>
+					</fieldset>
+				</form>
+				<div class="like">
+					<button class="like-btn"><i class="fa fa-thumbs-o-up fa-4x"></i></button><br />
+					<label class="like-label">点赞</label>
+				</div>
+				<hr />
+				<div class="script-comments">
+					<div class="script-comments-list">
+						<div class="script-comments-detail">
+							<img src="../img/QQ图片20190525203227.jpg" />
+							<label class="script-comments-username">菜菜鸡：</label>
+							<label class="script-comments-detail-content">你这个脚本好像有问题，在第&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2019-6-7 12:43:12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#1楼)</label>
+							<hr align="center"/>
+						</div>
+						<div class="script-comments-detail">
+							<img src="../img/QQ图片20190525203227.jpg" />
+							<label class="script-comments-username">菜菜鸡：</label>
+							<label class="script-comments-detail-content">你这个脚本好像有问题，在第&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2019-6-7 12:43:12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#1楼)</label>
+							<hr align="center"/>
+						</div>
+						<div class="script-comments-detail">
+							<img src="../img/QQ图片20190525203227.jpg" />
+							<label class="script-comments-username">菜菜鸡：</label>
+							<label class="script-comments-detail-content">你这个脚本好像有问题，在第你这个脚本好像有问题，在第你这个脚本好像有问题，在第你这个脚本好像有问题，在第你这个脚本好像有问题，在第你这个脚本好像有问题，在第你这个脚本好像有问题，在第&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2019-6-7 12:43:12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#1楼)</label>
+							<hr align="center"/>
+						</div>
+						<div class="script-comments-detail">
+							<img src="../img/QQ图片20190525203227.jpg" />
+							<label class="script-comments-username">菜菜鸡：</label>
+							<label class="script-comments-detail-content">你这个脚本好像有问题，在第&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2019-6-7 12:43:12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#1楼)</label>
+							<hr align="center"/>
+						</div>
+					</div>
+					<form class="script-comments-form">
+						<input type="text" id="script-content" placeholder="写入你的评论..." />
+						<label class="form-data" for="script-content">评论内容：</label>
+						<textarea id="script-content-true" class="form-data" rows="4" cols="90" maxlength="300" placeholder="写入你的评论..."></textarea>
+						<br class="form-data" />
+					<label class="form-data" for="script-comment-username">昵称：</label>
+					<input class="form-data" type="text" placeholder="写入你的昵称..." />
+					<label class="form-data" for="script-comment-username">邮箱：</label>
+					<input class="form-data" type="text" placeholder="写入你的邮箱..." />
+					<br class="form-data" />
+					<button class="form-data" type="submit">评论</button>
+					</form>
+				</div>
 			</div>
 			<div class="box1">
 				<div class="box1-title">
@@ -417,6 +499,6 @@
 		<div class="foot">
 
 		</div>
-
+		
 	</body>
 </html>
