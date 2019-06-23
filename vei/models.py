@@ -8,7 +8,6 @@ from django.db import models
 # 自定义文件存储路径+文件名
 
 
-
 class Spider_type(models.Model):
     """
     爬虫类型
@@ -50,11 +49,21 @@ class Spider(models.Model):
     like_num = models.IntegerField(verbose_name="点赞次数", default=0)
     comments_num = models.IntegerField(verbose_name="评论数", default=0)
     spider_status = models.CharField(verbose_name="爬虫状态",choices=SPIDER_STATUS,default='failed',max_length=30)
+    error_num = models.IntegerField(verbose_name="出错次数",default=0)
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
 
+
+
     def save(self, *args, **kwargs):
+        # 如果用户未上传网站图片
         if not self.website_img:
             self.website_img = '../static/img/{}.gif'.format(random.randrange(1,8))
+        # 如果爬虫脚本出现错误超过50次
+        if self.error_num >=50:
+            if self.error_num >= 100:
+                self.spider_status = 'failed'
+            else:
+                self.spider_status = 'error'
 
         super(Spider, self).save(*args, **kwargs)
 
@@ -65,12 +74,42 @@ class Spider(models.Model):
         verbose_name = "爬虫"
         verbose_name_plural = verbose_name
 
-# class Comments(models.Model):
-#     spider = models.ForeignKey("Spider", verbose_name="评论对象", on_delete=models.CASCADE,)
-#     content = models.TextField(verbose_name="评论内容", max_length=200, )
-#     nickname = models.CharField(verbose_name="评论人", max_length=20)
-#     comments_email = models.CharField(verbose_name="评论邮箱",max_length=100)
-#
-#     class Meta:
-#         verbose_name = "评论"
-#         verbose_name_plural = verbose_name
+class Comments(models.Model):
+    spider = models.ForeignKey("Spider", verbose_name="评论对象", on_delete=models.CASCADE,)
+    content = models.TextField(verbose_name="评论内容", max_length=200, )
+    comments_name = models.CharField(verbose_name="评论人", max_length=20)
+    comments_email = models.CharField(verbose_name="评论邮箱",max_length=100)
+    comments_img = models.ImageField(upload_to='comments_imgs/')
+
+    add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
+
+
+
+    class Meta:
+        verbose_name = "评论"
+        verbose_name_plural = verbose_name
+
+
+class Spider_Error(models.Model):
+    spider = models.ForeignKey("Spider", verbose_name="出错爬虫", on_delete=models.CASCADE,)
+    Error_content = models.CharField(verbose_name="报错内容",max_length=500)
+
+    add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
+
+
+    def save(self, *args, **kwargs):
+        spider= Spider.objects.get(spider=self.spider)
+        spider.error_num += 1
+        if spider.error_num >= 50:
+            if spider.error_num >= 100:
+                spider.spider_status = 'failed'
+            else:
+                spider.spider_status = 'error'
+        spider.save()
+
+
+        super(Spider_Error, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "脚本报错"
+        verbose_name_plural = verbose_name

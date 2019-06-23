@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Spider_type, Spider
+from .models import Spider_type, Spider,Comments,Spider_Error
 
 from Email.audit_statusmod_mail import Send_email
 
@@ -30,5 +30,15 @@ class SpiderAdmin(admin.ModelAdmin):
         obj.save()
 
 
+class CommentsAdmin(admin.ModelAdmin):
+    list_display = ['spider','content','comments_name','comments_email','add_time',]
+
+class ErrorAdmin(admin.ModelAdmin):
+    list_display = ['spider','Error_content','add_time']
+
+
+
 admin.site.register(Spider_type, Spider_typeAdmin)
 admin.site.register(Spider, SpiderAdmin)
+admin.site.register(Comments, CommentsAdmin)
+admin.site.register(Spider_Error, ErrorAdmin)

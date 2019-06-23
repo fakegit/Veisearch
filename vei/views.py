@@ -1,9 +1,9 @@
 import importlib
 import json
-
+import random
 from django.shortcuts import render,HttpResponse
 
-from .models import Spider_type, Spider
+from .models import Spider_type, Spider,Comments,Spider_Error
 
 
 
@@ -79,10 +79,14 @@ def scriptdetail(request, script_id):
         spider.save()
         spider_content = spider.content.read().decode('utf-8').lstrip()
 
+    # 获取评论
+    comments_list = Comments.objects.filter(spider=spider)
+
     context = {
         'spider_type_list': spider_type_list,
         'spider': spider,
         'spider_content':spider_content,
+        'comments_list':comments_list,
     }
 
     return render(request, 'scriptdetail.html', context)
@@ -105,3 +109,38 @@ def script_test(request,script_id):
 
     return HttpResponse(json.dumps(result))
 
+def comments(request,script_id):
+    """
+    评论
+    :param request:
+    :param script_id:
+    :return:
+    """
+    spider = Spider.objects.filter(pk=script_id)
+    if spider.exists():
+        spider = spider[0]
+
+    comments_name = ''
+    comments_content =''
+    comments_email = ''
+    if request.is_ajax():
+        comments_name=request.POST.get('comments_name')
+        comments_content = request.POST.get('comments_content')
+        comments_email = request.POST.get('comments_email')
+
+    print(comments_name,comments_content,comments_email)
+    comments = Comments()
+    comments.spider = spider
+    comments.comments_email = comments_email
+    comments.comments_name = comments_name
+    comments.content = comments_content
+    comments.comments_img ='../static/img/{}.gif'.format(random.randrange(1,8))
+    comments.save()
+
+    new_comments = {}
+    new_comments["comments_name"] = comments.comments_name
+    new_comments["comments_content"] = comments.content = comments_content
+    new_comments["comments_img"] = str(comments.comments_img)
+    new_comments["add_time"] = str(comments.add_time.year)+'年'+str(comments.add_time.month)+'月'+str(comments.add_time.day)+'日 '+str(comments.add_time.hour)+':'+str(comments.add_time.minute)
+
+    return HttpResponse(json.dumps(new_comments))
