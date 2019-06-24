@@ -1,595 +1,447 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>脚本列表</title>
-		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/scriptlist.css" />
-		<link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.min.css" />
-		<script src="js/scriptlist.js"></script>
-		<script src="js/scroll.js"></script>
-			<script type="text/javascript">
-			$(function() {
-				$('.myscroll').myScroll({
-					speed: 40, //数值越大，速度越慢
-					rowHeight: 26 //li的高度
-				});
-				$('.comments').myScroll({
-					speed: 40, //数值越大，速度越慢
-					rowHeight: 90 //li的高度
-				});
-				$('.script-list-right').myScroll({
-					speed: 40, //数值越大，速度越慢
-					rowHeight: 30 //li的高度
-				});
-			});
-		</script>
-	</head>
-	<body>
-		<div class="head">
-			<ul>
-				<li><a href="index.html">网站首页</a></li>
-				<li>
-					<div class="dropdown">
-						<a class="drop-span" href="javascript:void(0)">资源搜索</a>
-						<div class="dropdown-content">
-							<div class="search-div"><a href="/">电影搜索</a></div>
-							<div class="search-div"><a href="/">云盘搜索</a></div>
-							<div class="search-div"><a href="/">小说搜索</a></div>
-							<div class="search-div"><a href="/">音乐搜索</a></div>
-						</div>
-					</div>
-				</li>
-				<li><a href="/">我的博客</a></li>
-				<li><a href="/">GitHub<i class="fa fa-github" aria-hidden="true"></i></a></li>
-				<li><a href="/">给我留言</a></li>
-			</ul>
-		</div>
-		<div class="main">
-			<div class="script-list">
-				<div class="script-type">
-					<div class="script-type-title">
-						<label>脚本类型</label>
-					</div>
-					<div class="script-type-list1">
-						<a href="/" class="script-tag">电影</a>
-						<a href="/" class="script-tag">小说</a>
-						<a href="/" class="script-tag">音乐</a>
-						<a href="/" class="script-tag">云盘</a>
-						<a href="/" class="script-tag">代理</a>
-						<a href="/" class="script-tag">学习资料</a>
-					</div>
-					<div class="script-type-title">
-						<label>特殊网站脚本</label>
-					</div>
-					<div class="script-type-list2">
-						<a href="/" class="script-tag">B站</a>
-						<a href="/" class="script-tag">优酷</a>
-						<a href="/" class="script-tag">起点中文网</a>
-						<a href="/" class="script-tag">QQ音乐</a>
-						<a href="/" class="script-tag">爱奇艺</a>
-						<a href="/" class="script-tag">逆风学习网</a>
-					</div>
-				</div>
-				<div class="script-list-top">
-					<label>电影脚本&gt;&gt;&gt;</label>
-				</div>
-				<div class="script-info">
-					<img src="img/3ZJ1%25SO@16%5D%7BI$0EN4%5D)R20.gif" />
-					<div class="script-describe">
-						<div class="script-title">
-							<a href="scriptdetail.html">80s电影网</a>
-						</div>
-						<div class="script-info-describe">
-							<div class="detaill">
-								<a href="/">电影</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.80s.com">https://www.80s.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;26天前
-							</div>
-							<div class="detailr">
-								<i class="fa fa-thumbs-o-up"></i>13
-								<i class="fa fa-commenting" aria-hidden="true"></i>27
-								<i class="fa fa-eye" aria-hidden="true"></i>4
-							</div>
+<head>
+    <meta charset="utf-8">
+    <title>{{ this_spider_type }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/scriptlist.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static '/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+    <script src="{% static '/js/scriptlist.js' %}"></script>
+    <script src="{% static '/js/scroll.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.myscroll').myScroll({
+                speed: 40, //数值越大，速度越慢
+                rowHeight: 26 //li的高度
+            });
+            $('.comments').myScroll({
+                speed: 40, //数值越大，速度越慢
+                rowHeight: 90 //li的高度
+            });
+            $('.script-list-right').myScroll({
+                speed: 40, //数值越大，速度越慢
+                rowHeight: 30 //li的高度
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="head">
+    <ul>
+        <li><a href="index.html">网站首页</a></li>
+        <li>
+            <div class="dropdown">
+                <a class="drop-span" href="javascript:void(0)">资源搜索</a>
+                <div class="dropdown-content">
+                    <div class="search-div"><a href="/">电影搜索</a></div>
+                    <div class="search-div"><a href="/">云盘搜索</a></div>
+                    <div class="search-div"><a href="/">小说搜索</a></div>
+                    <div class="search-div"><a href="/">音乐搜索</a></div>
+                </div>
+            </div>
+        </li>
+        <li><a href="/">我的博客</a></li>
+        <li><a href="/">GitHub<i class="fa fa-github" aria-hidden="true"></i></a></li>
+        <li><a href="/">给我留言</a></li>
+    </ul>
+</div>
+<div class="main">
+    <div class="script-list">
+        <div class="script-type">
+            <div class="script-type-title">
+                <label>脚本类型</label>
+            </div>
+            <div class="script-type-list1">
+                {% for spider_type in spider_type_list %}
+                    <a href="/script-list/{{ forloop.counter }}" class="script-tag">{{ spider_type.name }}</a>
+                {% endfor %}
 
-						</div>
-						<p class="detail">
-							&nbsp;&nbsp;&nbsp;&nbsp;床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。
-						</p>
-						<hr>
-					</div>
-				</div>
-				<div class="script-info">
-					<img src="img/3ZJ1%25SO@16%5D%7BI$0EN4%5D)R20.gif" />
-					<div class="script-describe">
-						<div class="script-title">
-							<a href="/">80s电影网</a>
-						</div>
-						<div class="script-info-describe">
-							<div class="detaill">
-								<a href="/">电影</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.80s.com">https://www.80s.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;26天前
-							</div>
-							<div class="detailr">
-								<i class="fa fa-thumbs-o-up"></i>13
-								<i class="fa fa-commenting" aria-hidden="true"></i>27
-								<i class="fa fa-eye" aria-hidden="true"></i>4
-							</div>
+            </div>
+            <div class="script-type-title">
+                <label>特殊网站脚本</label>
+            </div>
+            <div class="script-type-list2">
+                <a href="/" class="script-tag">B站</a>
+                <a href="/" class="script-tag">优酷</a>
+                <a href="/" class="script-tag">起点中文网</a>
+                <a href="/" class="script-tag">QQ音乐</a>
+                <a href="/" class="script-tag">爱奇艺</a>
+                <a href="/" class="script-tag">逆风学习网</a>
+            </div>
+        </div>
+        <div class="script-list-top">
+            <label>{{ this_spider_type }}脚本&gt;&gt;&gt;</label>
+        </div>
+        {% for spider in spider_list %}
+            <div class="script-info">
+                <img src="/media/{{ spider.website_img }}"/>
+                <div class="script-describe">
+                    <div class="script-title">
+                        <a href="/script-detail/{{ spider.pk }}">{{ spider.website_name }}</a>
+                    </div>
+                    <div class="script-info-describe">
+                        <div class="detaill">
+                            <a href="/script-list/{{ spider.spider_type.pk }}">{{ spider.spider_type }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+                                href="{{ spider.website_address }}">{{ spider.website_address }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.author }}&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.add_time }}
+                        </div>
+                        <div class="detailr">
+                            <i class="fa fa-thumbs-o-up"></i>{{ spider.like_num }}
+                            <i class="fa fa-commenting" aria-hidden="true"></i>{{ spider.comments_num }}
+                            <i class="fa fa-eye" aria-hidden="true"></i>{{ spider.view_num }}
+                        </div>
 
-						</div>
-						<p class="detail">
-							&nbsp;&nbsp;&nbsp;&nbsp;床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。
-						</p>
-						<hr>
-					</div>
-				</div>
-				<div class="script-info">
-					<img src="img/3ZJ1%25SO@16%5D%7BI$0EN4%5D)R20.gif" />
-					<div class="script-describe">
-						<div class="script-title">
-							<a href="/">80s电影网</a>
-						</div>
-						<div class="script-info-describe">
-							<div class="detaill">
-								<a href="/">电影</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.80s.com">https://www.80s.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;26天前
-							</div>
-							<div class="detailr">
-								<i class="fa fa-thumbs-o-up"></i>13
-								<i class="fa fa-commenting" aria-hidden="true"></i>27
-								<i class="fa fa-eye" aria-hidden="true"></i>4
-							</div>
+                    </div>
+                    <p class="detail">
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{ spider.function_introduce }}
+                    </p>
+                    <hr>
+                </div>
+            </div>
+        {% endfor %}
 
-						</div>
-						<p class="detail">
-							&nbsp;&nbsp;&nbsp;&nbsp;床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。
-						</p>
-						<hr>
-					</div>
-				</div>
-				<div class="script-info">
-					<img src="img/3ZJ1%25SO@16%5D%7BI$0EN4%5D)R20.gif" />
-					<div class="script-describe">
-						<div class="script-title">
-							<a href="/">80s电影网</a>
-						</div>
-						<div class="script-info-describe">
-							<div class="detaill">
-								<a href="/">电影</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.80s.com">https://www.80s.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;26天前
-							</div>
-							<div class="detailr">
-								<i class="fa fa-thumbs-o-up"></i>13
-								<i class="fa fa-commenting" aria-hidden="true"></i>27
-								<i class="fa fa-eye" aria-hidden="true"></i>4
-							</div>
 
-						</div>
-						<p class="detail">
-							&nbsp;&nbsp;&nbsp;&nbsp;床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。
-						</p>
-						<hr>
-					</div>
-				</div>
-				<div class="script-info">
-					<img src="img/3ZJ1%25SO@16%5D%7BI$0EN4%5D)R20.gif" />
-					<div class="script-describe">
-						<div class="script-title">
-							<a href="/">80s电影网</a>
-						</div>
-						<div class="script-info-describe">
-							<div class="detaill">
-								<a href="/">电影</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.80s.com">https://www.80s.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;26天前
-							</div>
-							<div class="detailr">
-								<i class="fa fa-thumbs-o-up"></i>13
-								<i class="fa fa-commenting" aria-hidden="true"></i>27
-								<i class="fa fa-eye" aria-hidden="true"></i>4
-							</div>
 
-						</div>
-						<p class="detail">
-							&nbsp;&nbsp;&nbsp;&nbsp;床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。
-						</p>
-						<hr>
-					</div>
-				</div>
-				<div class="script-info">
-					<img src="img/3ZJ1%25SO@16%5D%7BI$0EN4%5D)R20.gif" />
-					<div class="script-describe">
-						<div class="script-title">
-							<a href="/">80s电影网</a>
-						</div>
-						<div class="script-info-describe">
-							<div class="detaill">
-								<a href="/">电影</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.80s.com">https://www.80s.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;26天前
-							</div>
-							<div class="detailr">
-								<i class="fa fa-thumbs-o-up"></i>13
-								<i class="fa fa-commenting" aria-hidden="true"></i>27
-								<i class="fa fa-eye" aria-hidden="true"></i>4
-							</div>
+    </div>
+    <div class="box1">
+        <div class="box1-title">
+            <label><i class="fa fa-code"></i>脚本运行情况</label>
+        </div>
+        <div class="script-list-right">
+            <ul>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
+                        <i class="fa fa-times-circle-o">停止运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">起点中文网</a>&nbsp;&nbsp;|&nbsp;&nbsp;小说&nbsp;&nbsp;|&nbsp;&nbsp;超级小扒手&nbsp;&nbsp;|&nbsp;&nbsp;6day|&nbsp;&nbsp;
+                        <i class="fa fa-exclamation-circle">出现意外</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
+                        <i class="fa fa-times-circle-o">停止运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
+                        <i class="fa fa-times-circle-o">停止运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
+                        <i class="fa fa-times-circle-o">停止运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <i class="fa fa-check-circle-o">正在运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
+                        <i class="fa fa-times-circle-o">停止运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
+                        <i class="fa fa-times-circle-o">停止运行</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">起点中文网</a>&nbsp;&nbsp;|&nbsp;&nbsp;小说&nbsp;&nbsp;|&nbsp;&nbsp;超级小扒手&nbsp;&nbsp;|&nbsp;&nbsp;6day|&nbsp;&nbsp;
+                        <i class="fa fa-exclamation-circle">出现意外</i>
+                    </div>
+                </li>
+                <li>
+                    <div class="script-execution">
+                        &nbsp;&nbsp;<a href="https://www.80s.com">起点中文网</a>&nbsp;&nbsp;|&nbsp;&nbsp;小说&nbsp;&nbsp;|&nbsp;&nbsp;超级小扒手&nbsp;&nbsp;|&nbsp;&nbsp;6day|&nbsp;&nbsp;
+                        <i class="fa fa-exclamation-circle">出现意外</i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="box2">
+        <div class="box1-title">
+            <label><i class="fa fa-commenting-o"></i>最新评论</label>
+        </div>
+        <div class="comments">
+            <ul>
+                <li>
+                    <div class="comments-info">
+                        <div class="comments-title">
+                            <label class="comments-name">菜菜鸡</label>
+                            &nbsp;&nbsp;评论&nbsp;&nbsp;
+                            <a href="/">80s电影网</a>
 
-						</div>
-						<p class="detail">
-							&nbsp;&nbsp;&nbsp;&nbsp;床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。
-						</p>
-						<hr>
-					</div>
-				</div>
-				<div class="script-info">
-					<img src="img/3ZJ1%25SO@16%5D%7BI$0EN4%5D)R20.gif" />
-					<div class="script-describe">
-						<div class="script-title">
-							<a href="/">80s电影网</a>
-						</div>
-						<div class="script-info-describe">
-							<div class="detaill">
-								<a href="/">电影</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.80s.com">https://www.80s.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;26天前
-							</div>
-							<div class="detailr">
-								<i class="fa fa-thumbs-o-up"></i>13
-								<i class="fa fa-commenting" aria-hidden="true"></i>27
-								<i class="fa fa-eye" aria-hidden="true"></i>4
-							</div>
+                            <label class="comments-time">2019-6-3 12:34:18</label>
 
-						</div>
-						<p class="detail">
-							&nbsp;&nbsp;&nbsp;&nbsp;床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。床前明月光，有疑是地上霜。举头望明月，低头思故乡。
-						</p>
-						<hr>
-					</div>
-				</div>
+                        </div>
 
-				<div class="script-list-pag">
-					<ul class="pagination">
-						<li><a href="#">«</a></li>
-						<li><a href="#">1</a></li>
-						<li><a class="active" href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">6</a></li>
-						<li><a href="#">7</a></li>
-						<li><a href="#">»</a></li>
-					</ul>
-					
-				</div>
-			</div>
-			<div class="box1">
-				<div class="box1-title">
-					<label><i class="fa fa-code"></i>脚本运行情况</label>
-				</div>
-				<div class="script-list-right">
-					<ul>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
-								<i class="fa fa-times-circle-o">停止运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">起点中文网</a>&nbsp;&nbsp;|&nbsp;&nbsp;小说&nbsp;&nbsp;|&nbsp;&nbsp;超级小扒手&nbsp;&nbsp;|&nbsp;&nbsp;6day|&nbsp;&nbsp;
-								<i class="fa fa-exclamation-circle">出现意外</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
-								<i class="fa fa-times-circle-o">停止运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
-								<i class="fa fa-times-circle-o">停止运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
-								<i class="fa fa-times-circle-o">停止运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">80s电影网</a>&nbsp;&nbsp;|&nbsp;&nbsp;电影&nbsp;&nbsp;|&nbsp;&nbsp;菜菜鸡&nbsp;&nbsp;|&nbsp;&nbsp;23day&nbsp;&nbsp;|&nbsp;&nbsp;
-								<i class="fa fa-check-circle-o">正在运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
-								<i class="fa fa-times-circle-o">停止运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">QQ音乐</a>&nbsp;&nbsp;|&nbsp;&nbsp;音乐&nbsp;&nbsp;|&nbsp;&nbsp;小白白&nbsp;&nbsp;|&nbsp;&nbsp;16day|&nbsp;&nbsp;
-								<i class="fa fa-times-circle-o">停止运行</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">起点中文网</a>&nbsp;&nbsp;|&nbsp;&nbsp;小说&nbsp;&nbsp;|&nbsp;&nbsp;超级小扒手&nbsp;&nbsp;|&nbsp;&nbsp;6day|&nbsp;&nbsp;
-								<i class="fa fa-exclamation-circle">出现意外</i>
-							</div>
-						</li>
-						<li>
-							<div class="script-execution">
-								&nbsp;&nbsp;<a href="https://www.80s.com">起点中文网</a>&nbsp;&nbsp;|&nbsp;&nbsp;小说&nbsp;&nbsp;|&nbsp;&nbsp;超级小扒手&nbsp;&nbsp;|&nbsp;&nbsp;6day|&nbsp;&nbsp;
-								<i class="fa fa-exclamation-circle">出现意外</i>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="box2">
-				<div class="box1-title">
-					<label><i class="fa fa-commenting-o"></i>最新评论</label>
-				</div>
-				<div class="comments">
-					<ul>
-						<li>
-							<div class="comments-info">
-								<div class="comments-title">
-									<label class="comments-name">菜菜鸡</label>
-									&nbsp;&nbsp;评论&nbsp;&nbsp;
-									<a href="/">80s电影网</a>
-				
-									<label class="comments-time">2019-6-3 12:34:18</label>
-				
-								</div>
-				
-								<div class="comments-detail">
-									你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
-								</div>
-								<hr />
-							</div>
-						</li>
-						<li>
-							<div class="comments-info">
-								<div class="comments-title">
-									<label class="comments-name">菜菜鸡</label>
-									&nbsp;&nbsp;评论&nbsp;&nbsp;
-									<a href="/">80s电影网</a>
-				
-									<label class="comments-time">2019-6-3 12:34:18</label>
-				
-								</div>
-				
-								<div class="comments-detail">
-									你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
-								</div>
-								<hr />
-							</div>
-						</li>
-						<li>
-							<div class="comments-info">
-								<div class="comments-title">
-									<label class="comments-name">菜菜鸡</label>
-									&nbsp;&nbsp;评论&nbsp;&nbsp;
-									<a href="/">80s电影网</a>
-				
-									<label class="comments-time">2019-6-3 12:34:18</label>
-				
-								</div>
-				
-								<div class="comments-detail">
-									你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
-								</div>
-								<hr />
-							</div>
-						</li>
-						<li>
-							<div class="comments-info">
-								<div class="comments-title">
-									<label class="comments-name">菜菜鸡</label>
-									&nbsp;&nbsp;评论&nbsp;&nbsp;
-									<a href="/">80s电影网</a>
-				
-									<label class="comments-time">2019-6-3 12:34:18</label>
-				
-								</div>
-				
-								<div class="comments-detail">
-									你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
-								</div>
-								<hr />
-							</div>
-						</li>
-						<li>
-							<div class="comments-info">
-								<div class="comments-title">
-									<label class="comments-name">菜菜鸡</label>
-									&nbsp;&nbsp;评论&nbsp;&nbsp;
-									<a href="/">80s电影网</a>
-				
-									<label class="comments-time">2019-6-3 12:34:18</label>
-				
-								</div>
-				
-								<div class="comments-detail">
-									你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
-								</div>
-								<hr />
-							</div>
-						</li>
-						<li>
-							<div class="comments-info">
-								<div class="comments-title">
-									<label class="comments-name">菜菜鸡</label>
-									&nbsp;&nbsp;评论&nbsp;&nbsp;
-									<a href="/">80s电影网</a>
-				
-									<label class="comments-time">2019-6-3 12:34:18</label>
-				
-								</div>
-				
-								<div class="comments-detail">
-									你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
-								</div>
-								<hr />
-							</div>
-						</li>
-						<li>
-							<div class="comments-info">
-								<div class="comments-title">
-									<label class="comments-name">菜菜鸡</label>
-									&nbsp;&nbsp;评论&nbsp;&nbsp;
-									<a href="/">80s电影网</a>
-				
-									<label class="comments-time">2019-6-3 12:34:18</label>
-				
-								</div>
-				
-								<div class="comments-detail">
-									你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
-								</div>
-								<hr />
-							</div>
-						</li>
-						<li>
-							<div class="comments-info">
-								<div class="comments-title">
-									<label class="comments-name">菜菜鸡</label>
-									&nbsp;&nbsp;评论&nbsp;&nbsp;
-									<a href="/">80s电影网</a>
-				
-									<label class="comments-time">2019-6-3 12:34:18</label>
-				
-								</div>
-				
-								<div class="comments-detail">
-									你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
-								</div>
-								<hr />
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="box3">
-				<div class="box1-title">
-					<label><i class="fa fa-gear"></i>代理展示</label>
-				</div>
-				<div class="myscroll">
-					<ul>
-						<li>47.98.174.153:8118@HTTP#[未知]浙江省杭州市 </li>
-						<li>111.231.24.186:808@HTTP#[未知]上海市</li>
-						<li>52.83.198.227:3128@HTTP#[透明]宁夏中卫 </li>
-						<li>119.179.142.253:8060@HTTP#[未知]山东省 </li>
-						<li>222.162.170.242:80@HTTP#[未知]吉林省吉林市</li>
-						<li>222.95.171.193:8118@HTTP#[普匿]江苏省南京市 </li>
-						<li>114.67.235.233:3128@HTTP#[未知]北京市 </li>
-						<li>119.130.134.141:8888@HTTP#[未知]广东省广州市</li>
-						<li>111.206.6.101:80@HTTP#[高匿]北京市 </li>
-						<li>218.58.193.98:8060@HTTP#[未知]山东省威海市</li>
-						<li>47.97.177.53:8888@HTTP#[未知]浙江省杭州市</li>
-						<li>222.95.20.34:61234@HTTP#[普匿]江苏省南京市白下区 </li>
-						<li>113.140.1.82:53281@HTTP#[未知]陕西省西安市 </li>
-						<li>119.179.179.208:8060@HTTP#[未知]山东省 </li>
-						<li>27.154.34.146:58614@HTTP#[未知]福建省厦门市</li>
-						<li>49.51.68.122:1080@HTTP#[未知]上海市浦东新区 </li>
-						<li>121.204.150.97:8118@HTTP#[未知]福建省厦门市</li>
-						<li>182.34.32.147:9999@HTTP#[未知]山东省烟台市</li>
-						<li>112.247.180.37:8060@HTTP#[未知]山东省威海市</li>
-						<li>117.149.12.242:8060@HTTP#[未知]浙江省金华市</li>
-						<li>106.15.231.182:80@HTTP#[未知]北京市 </li>
-						<li>58.21.132.57:8080@HTTP#[未知]吉林省 </li>
-						<li>140.143.142.14:1080@HTTP#[未知]中国</li>
-						<li>139.129.207.72:808@HTTP#[未知]北京市 </li>
-						<li>112.65.52.28:9000@HTTP#[未知]上海市徐汇区 </li>
-						<li>119.179.134.103:8060@HTTP#[未知]山东省 </li>
-						<li>115.200.211.64:8118@HTTP#[普匿]浙江省杭州市 </li>
-						<li>120.236.128.201:8060@HTTP#[未知]广东省广州市</li>
-						<li>119.139.198.200:3128@HTTP#[未知]广东省深圳市 </li>
-						<li>117.191.11.73:80@HTTP#[高匿]新疆 移动</li>
-						<li>219.142.132.146:61233@HTTP#[未知]北京市 </li>
-						<li>112.17.121.88:8060@HTTP#[未知]中国 移动</li>
-						<li>125.123.120.83:9000@HTTP#[未知]浙江省嘉兴市 </li>
-						<li>101.37.152.85:8888@HTTP#[未知]浙江省杭州市</li>
-						<li>27.221.32.140:80@HTTP#[未知]山东省青岛市 </li>
-						<li>111.77.100.164:8118@HTTP#[普匿]江西省萍乡市 </li>
-						<li>140.143.65.146:8080@HTTP#[普匿]中国</li>
-						<li>47.107.74.84:8888@HTTP#[未知]浙江省杭州市 </li>
-						<li>115.231.5.230:44524@HTTP#[未知]浙江省绍兴市 </li>
-						<li>59.108.125.241:8080@HTTP#[未知]北京市 方正宽带</li>
-					</ul>
-				</div>
-			</div>
+                        <div class="comments-detail">
+                            你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
+                        </div>
+                        <hr/>
+                    </div>
+                </li>
+                <li>
+                    <div class="comments-info">
+                        <div class="comments-title">
+                            <label class="comments-name">菜菜鸡</label>
+                            &nbsp;&nbsp;评论&nbsp;&nbsp;
+                            <a href="/">80s电影网</a>
 
-		</div>
-		<div class="foot">
+                            <label class="comments-time">2019-6-3 12:34:18</label>
 
-		</div>
-	</body>
+                        </div>
+
+                        <div class="comments-detail">
+                            你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
+                        </div>
+                        <hr/>
+                    </div>
+                </li>
+                <li>
+                    <div class="comments-info">
+                        <div class="comments-title">
+                            <label class="comments-name">菜菜鸡</label>
+                            &nbsp;&nbsp;评论&nbsp;&nbsp;
+                            <a href="/">80s电影网</a>
+
+                            <label class="comments-time">2019-6-3 12:34:18</label>
+
+                        </div>
+
+                        <div class="comments-detail">
+                            你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
+                        </div>
+                        <hr/>
+                    </div>
+                </li>
+                <li>
+                    <div class="comments-info">
+                        <div class="comments-title">
+                            <label class="comments-name">菜菜鸡</label>
+                            &nbsp;&nbsp;评论&nbsp;&nbsp;
+                            <a href="/">80s电影网</a>
+
+                            <label class="comments-time">2019-6-3 12:34:18</label>
+
+                        </div>
+
+                        <div class="comments-detail">
+                            你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
+                        </div>
+                        <hr/>
+                    </div>
+                </li>
+                <li>
+                    <div class="comments-info">
+                        <div class="comments-title">
+                            <label class="comments-name">菜菜鸡</label>
+                            &nbsp;&nbsp;评论&nbsp;&nbsp;
+                            <a href="/">80s电影网</a>
+
+                            <label class="comments-time">2019-6-3 12:34:18</label>
+
+                        </div>
+
+                        <div class="comments-detail">
+                            你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
+                        </div>
+                        <hr/>
+                    </div>
+                </li>
+                <li>
+                    <div class="comments-info">
+                        <div class="comments-title">
+                            <label class="comments-name">菜菜鸡</label>
+                            &nbsp;&nbsp;评论&nbsp;&nbsp;
+                            <a href="/">80s电影网</a>
+
+                            <label class="comments-time">2019-6-3 12:34:18</label>
+
+                        </div>
+
+                        <div class="comments-detail">
+                            你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
+                        </div>
+                        <hr/>
+                    </div>
+                </li>
+                <li>
+                    <div class="comments-info">
+                        <div class="comments-title">
+                            <label class="comments-name">菜菜鸡</label>
+                            &nbsp;&nbsp;评论&nbsp;&nbsp;
+                            <a href="/">80s电影网</a>
+
+                            <label class="comments-time">2019-6-3 12:34:18</label>
+
+                        </div>
+
+                        <div class="comments-detail">
+                            你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
+                        </div>
+                        <hr/>
+                    </div>
+                </li>
+                <li>
+                    <div class="comments-info">
+                        <div class="comments-title">
+                            <label class="comments-name">菜菜鸡</label>
+                            &nbsp;&nbsp;评论&nbsp;&nbsp;
+                            <a href="/">80s电影网</a>
+
+                            <label class="comments-time">2019-6-3 12:34:18</label>
+
+                        </div>
+
+                        <div class="comments-detail">
+                            你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，你这个类出了点问题，
+                        </div>
+                        <hr/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="box3">
+        <div class="box1-title">
+            <label><i class="fa fa-gear"></i>代理展示</label>
+        </div>
+        <div class="myscroll">
+            <ul>
+                <li>47.98.174.153:8118@HTTP#[未知]浙江省杭州市</li>
+                <li>111.231.24.186:808@HTTP#[未知]上海市</li>
+                <li>52.83.198.227:3128@HTTP#[透明]宁夏中卫</li>
+                <li>119.179.142.253:8060@HTTP#[未知]山东省</li>
+                <li>222.162.170.242:80@HTTP#[未知]吉林省吉林市</li>
+                <li>222.95.171.193:8118@HTTP#[普匿]江苏省南京市</li>
+                <li>114.67.235.233:3128@HTTP#[未知]北京市</li>
+                <li>119.130.134.141:8888@HTTP#[未知]广东省广州市</li>
+                <li>111.206.6.101:80@HTTP#[高匿]北京市</li>
+                <li>218.58.193.98:8060@HTTP#[未知]山东省威海市</li>
+                <li>47.97.177.53:8888@HTTP#[未知]浙江省杭州市</li>
+                <li>222.95.20.34:61234@HTTP#[普匿]江苏省南京市白下区</li>
+                <li>113.140.1.82:53281@HTTP#[未知]陕西省西安市</li>
+                <li>119.179.179.208:8060@HTTP#[未知]山东省</li>
+                <li>27.154.34.146:58614@HTTP#[未知]福建省厦门市</li>
+                <li>49.51.68.122:1080@HTTP#[未知]上海市浦东新区</li>
+                <li>121.204.150.97:8118@HTTP#[未知]福建省厦门市</li>
+                <li>182.34.32.147:9999@HTTP#[未知]山东省烟台市</li>
+                <li>112.247.180.37:8060@HTTP#[未知]山东省威海市</li>
+                <li>117.149.12.242:8060@HTTP#[未知]浙江省金华市</li>
+                <li>106.15.231.182:80@HTTP#[未知]北京市</li>
+                <li>58.21.132.57:8080@HTTP#[未知]吉林省</li>
+                <li>140.143.142.14:1080@HTTP#[未知]中国</li>
+                <li>139.129.207.72:808@HTTP#[未知]北京市</li>
+                <li>112.65.52.28:9000@HTTP#[未知]上海市徐汇区</li>
+                <li>119.179.134.103:8060@HTTP#[未知]山东省</li>
+                <li>115.200.211.64:8118@HTTP#[普匿]浙江省杭州市</li>
+                <li>120.236.128.201:8060@HTTP#[未知]广东省广州市</li>
+                <li>119.139.198.200:3128@HTTP#[未知]广东省深圳市</li>
+                <li>117.191.11.73:80@HTTP#[高匿]新疆 移动</li>
+                <li>219.142.132.146:61233@HTTP#[未知]北京市</li>
+                <li>112.17.121.88:8060@HTTP#[未知]中国 移动</li>
+                <li>125.123.120.83:9000@HTTP#[未知]浙江省嘉兴市</li>
+                <li>101.37.152.85:8888@HTTP#[未知]浙江省杭州市</li>
+                <li>27.221.32.140:80@HTTP#[未知]山东省青岛市</li>
+                <li>111.77.100.164:8118@HTTP#[普匿]江西省萍乡市</li>
+                <li>140.143.65.146:8080@HTTP#[普匿]中国</li>
+                <li>47.107.74.84:8888@HTTP#[未知]浙江省杭州市</li>
+                <li>115.231.5.230:44524@HTTP#[未知]浙江省绍兴市</li>
+                <li>59.108.125.241:8080@HTTP#[未知]北京市 方正宽带</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div class="foot">
+
+</div>
+</body>
 </html>

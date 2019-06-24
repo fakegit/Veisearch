@@ -32,7 +32,7 @@ $(document).ready(function () {
 
     $("#script-test-btn").click(function () {
         $.ajax({
-            url: "/script-test/" + test_id,
+            url: "/script-test/" + test_id+ '/',
             async: false,
             type: 'POST',
             headers: {"Content-Type": "application/x-www-form-urlencoded"},
@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     $("#comments-btn").click(function () {
         $.ajax({
-            url: '/comments/' + test_id,
+            url: '/comments/' + test_id + '/',
             async: false,
             type: 'POST',
             headers: {"Content-Type": "application/x-www-form-urlencoded"},

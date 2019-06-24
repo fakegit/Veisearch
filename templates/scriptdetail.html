@@ -39,18 +39,8 @@
 <body>
 <div class="head">
     <ul>
-        <li><a href="index.html">网站首页</a></li>
-        <li>
-            <div class="dropdown">
-                <a class="drop-span" href="javascript:void(0)">资源搜索</a>
-                <div class="dropdown-content">
-                    <div class="search-div"><a href="/">电影搜索</a></div>
-                    <div class="search-div"><a href="/">云盘搜索</a></div>
-                    <div class="search-div"><a href="/">小说搜索</a></div>
-                    <div class="search-div"><a href="/">音乐搜索</a></div>
-                </div>
-            </div>
-        </li>
+        <li><a href="/">网站首页</a></li>
+        <li><a href="/">微搜索</a></li>
         <li><a href="/">我的博客</a></li>
         <li><a href="/">GitHub<i class="fa fa-github" aria-hidden="true"></i></a></li>
         <li><a href="/">给我留言</a></li>
@@ -64,7 +54,7 @@
             </div>
             <div class="script-type-list1">
                 {% for spider_type in spider_type_list %}
-                    <a href="/" class="script-tag">{{ spider_type.name }}</a>
+                    <a href="/script-list/{{ spider_type.pk }}/" class="script-tag">{{ spider_type.name }}</a>
                 {% endfor %}
             </div>
             <div class="script-type-title">
@@ -87,7 +77,7 @@
         </div>
         <div class="script-detail-info">
             <label>分类：</label>
-            <a href="/">{{ spider.spider_type.name }}</a>
+            <a href="/script-list/{{ spider.spider_type.pk }}">{{ spider.spider_type.name }}</a>
             <label id="author">作者：</label>
             <label>{{ spider.author }}</label>
             <label id="viewcount"><i class="fa fa-eye" aria-hidden="true"></i>浏览：</label>

@@ -113,3 +113,4 @@ class Spider_Error(models.Model):
     class Meta:
         verbose_name = "脚本报错"
         verbose_name_plural = verbose_name
+

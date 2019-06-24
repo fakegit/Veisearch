@@ -91,7 +91,7 @@
         </form>
         <div class="upload-script">
             <label class="upload-script-label">如果您已完整阅读过以上注意事项并按照规定格式编写好脚本，那么您现在可以上传您的文件</label><br/>
-            <form class="upload-script" action="/upload-script/" method="post" enctype="multipart/form-data">
+            <form class="upload-script" action="/upload/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="file" name="file" class="script-files"/>
                 <fieldset>

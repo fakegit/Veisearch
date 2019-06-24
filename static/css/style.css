@@ -143,67 +143,7 @@ li a:hover {
     color: black;
 }
 
-.drop-span {
-    padding: 16px;
-    font-size: 14px;
-    color: #909399;
 
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    margin-top: 13px;
-    /* width: 100px; */
-    display: none;
-    position: absolute;
-    /* background-color: rgba(255, 255, 255, 0.1); */
-    /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
-    border-radius: 5px;
-}
-
-/* 下拉菜单的链接 */
-.dropdown-content a {
-    text-align: center;
-    /* color: #909399; */
-    padding: 10px 5px;
-    width: 90px;
-    text-decoration: none;
-    display: block;
-    /* 		background-color: rgba(255, 255, 255, 0.1);
-            background-color: rgba(255, 255, 255, 0); */
-    border-color: rgba(64, 158, 255, 0.3);
-    color: mediumaquamarine;
-    line-height: 1;
-}
-
-.search-div {
-    /* border-color: rgba(64, 158, 255, 0.3); */
-    /* background-color: #66CDAA; */
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    margin-top: 5px;
-    width: 100px;
-}
-
-/* 鼠标移上去后修改下拉菜单链接颜色 */
-.dropdown-content a:hover {
-    background-color: rgba(58, 142, 230, 0.2);
-    color: white;
-}
-
-/* 在鼠标移上去后显示下拉菜单 */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* 当下拉内容显示后修改下拉按钮的背景颜色 */
-.dropdown:hover .drop-span {
-    color: black;
-}
 
 /* 底部 */
 .foot-top {

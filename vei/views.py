@@ -88,6 +88,13 @@ def scriptdetail(request, script_id):
         'spider_content':spider_content,
         'comments_list':comments_list,
     }
+    # if request.META.has_key('HTTP_X_FORWARDED_FOR'):
+    #     ip = request.META['HTTP_X_FORWARDED_FOR']
+    # else:
+    #     ip = request.META['REMOTE_ADDR']
+    # print(request.META)
+
+
 
     return render(request, 'scriptdetail.html', context)
 
@@ -128,7 +135,6 @@ def comments(request,script_id):
         comments_content = request.POST.get('comments_content')
         comments_email = request.POST.get('comments_email')
 
-    print(comments_name,comments_content,comments_email)
     comments = Comments()
     comments.spider = spider
     comments.comments_email = comments_email
@@ -144,3 +150,47 @@ def comments(request,script_id):
     new_comments["add_time"] = str(comments.add_time.year)+'年'+str(comments.add_time.month)+'月'+str(comments.add_time.day)+'日 '+str(comments.add_time.hour)+':'+str(comments.add_time.minute)
 
     return HttpResponse(json.dumps(new_comments))
+
+def script_list(request,script_type_id):
+    """
+    脚本列表页
+    :param request:
+    :param script_type_id:
+    :return:
+    """
+    spider_type_list = Spider_type.objects.all()
+    this_spider_type = Spider_type.objects.filter(pk=script_type_id)
+    spider_list = []
+    if this_spider_type.exists():
+        this_spider_type = this_spider_type[0]
+        spider_list = Spider.objects.filter(spider_type=this_spider_type)
+
+    context = {
+        "spider_type_list":spider_type_list,
+        "spider_list":spider_list,
+        "this_spider_type":this_spider_type,
+    }
+
+    return render(request,'scriptlist.html',context=context)
+
+def veisearch(request):
+    return render(request,'veisearch.html')
+
+def search(request):
+    wd = ''
+    if request.method =="POST":
+        wd = request.body.decode("utf-8")[7:-2]
+    print(type(wd))
+    print(wd)
+    result = []
+    spider_list = Spider.objects.all()
+
+    for spider in spider_list:
+
+        model = importlib.import_module('media.spider_files.' + spider.name[:-3])
+        obj = getattr(model, spider.name[:-3])(wd)
+        result = obj.output_data()
+        print(result)
+
+
+    return HttpResponse(json.dumps(result))

@@ -9,8 +9,8 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}"/>
 <script src="{% static '/js/index.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="/static/css/animate.css"/>
-<link rel="stylesheet" type="text/css" href="/static/font-awesome-4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="{% static '/css/animate.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static '/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
 <script src="{% static '/js/scroll.js' %}"></script>
 <script type="text/javascript">
     $(function () {
@@ -32,17 +32,7 @@
 <div class="head">
     <ul>
         <li><a href="/">网站首页</a></li>
-        <li>
-            <div class="dropdown">
-                <a class="drop-span" href="javascript:void(0)">资源搜索</a>
-                <div class="dropdown-content">
-                    <div class="search-div"><a href="/">电影搜索</a></div>
-                    <div class="search-div"><a href="/">云盘搜索</a></div>
-                    <div class="search-div"><a href="/">小说搜索</a></div>
-                    <div class="search-div"><a href="/">音乐搜索</a></div>
-                </div>
-            </div>
-        </li>
+        <li><a href="">微搜索</a></li>
         <li><a href="/">我的博客</a></li>
         <li><a href="/">GitHub<i class="fa fa-github" aria-hidden="true"></i></a></li>
         <li><a href="/">给我留言</a></li>
@@ -57,24 +47,12 @@
     <div class="carousel">
         <nav class="carousel-nav">
             <ul>
-                <li><img class="carousel-img" src="img/207c659ed206ec87d0b68ab1aab0294b.gif" alt=""/></li>
-                <li class="search1">
-                    <img class="search-img" src="img/cdsearch.png"/>
-                    <div class="search-top">
-                        <input class="search-input" type="text"/>
-                        <button class="search-btn" type="button">搜索</button>
-                    </div>
-                    <div class="search-btm">
-                        <label class="search-label">Python</label>
-                        <label class="search-label">Java</label>
-                        <label class="search-label">C++</label>
-                        <label class="search-label">Golang</label>
-                    </div>
-                </li>
-                <li><img class="carousel-img" src="img/QQ图片20190525205903.jpg" alt=""/></li>
-                <li><img class="carousel-img" src="img/840156e0c496bfa855e1cee3dfb64610.gif" alt=""/></li>
-                <li><img class="carousel-img" src="img/QQ图片20190525164110.jpg" alt=""/></li>
-                <li><img class="carousel-img" src="img/_E5P4OYMR%5DARL(CG)%60%7B4)AW.gif"/></li>
+                <li><img class="carousel-img" src="/static/img/5.gif" alt=""/></li>
+                <li class="carousel-img" src="/static/img/8.gif" alt=""></li>
+                <li><img class="carousel-img" src="/static/img/1.gif" alt=""/></li>
+                <li><img class="carousel-img" src="/static/img/6.gif" alt=""/></li>
+                <li><img class="carousel-img" src="/static/img/9.gif" alt=""/></li>
+                <li><img class="carousel-img" src="/static/img/5.gif"/></li>
             </ul>
         </nav>
     </div>
@@ -113,7 +91,7 @@
                 <label class="data-nums">&nbsp;&nbsp;|&nbsp;&nbsp;635612385</label>
             </div>
         </div>
-        <img src="{% static 'img/6.gif' %}" style="width: 385px; height: 230px;"/>
+        <a href="/upload-script/"><img src="{% static 'img/16.gif' %}" style="width: 385px; height: 230px;"/></a>
     </div>
 
     <div class="scriptshows">
@@ -125,11 +103,11 @@
                 <img src="/media/{{ spider.website_img }}"/>
                 <div class="script-describe">
                     <div class="script-title">
-                        <a href="/scriptdetail/{{ spider.id }}">{{ spider.website_name }}</a>
+                        <a href="/script-detail/{{ spider.id }}">{{ spider.website_name }}</a>
                     </div>
                     <div class="script-info-describe">
                         <div class="detaill">
-                            <a href="scriptlist.html">{{ spider.spider_type.name }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{{ spider.website_address }}">{{ spider.website_address }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.author }}&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.add_time }}
+                            <a href="/script-list/{{ spider.spider_type.pk }}">{{ spider.spider_type.name }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://{{ spider.website_address }}">{{ spider.website_address }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.author }}&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.add_time }}
                         </div>
                         <div class="detailr">
                             <i class="fa fa-thumbs-o-up"></i>{{ spider.like_num }}
@@ -151,7 +129,7 @@
 
 
         <div class="script-more-btn">
-            <label><a href="/">查看更多脚本</a></label>
+            <label><a href="/script-list/1/">查看更多脚本</a></label>
         </div>
     </div>
     <div class="box2">
