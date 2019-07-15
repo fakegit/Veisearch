@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    {% block head %}
+    {% endblock head %}
+    <script src="{% static '/js/scroll.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.myscroll').myScroll({
+                speed: 40, //数值越大，速度越慢
+                rowHeight: 26 //li的高度
+            });
+            $('.comments').myScroll({
+                speed: 40, //数值越大，速度越慢
+                rowHeight: 90 //li的高度
+            });
+            $('.script-list').myScroll({
+                speed: 40, //数值越大，速度越慢
+                rowHeight: 30 //li的高度
+            });
+        });
+    </script>
+</head>
+
+
+<body>
+<div class="head">
+    <ul>
+        <li><a href="/">微搜索</a></li>
+        <li><a href="/pro">开发者首页</a></li>
+        <li><a href="https://github.com/Weibw162/Veisearch">GitHub<i class="fa fa-github" aria-hidden="true"></i></a>
+        </li>
+        <li><a href="mailto:weibw162@163.com">联系我</a></li>
+    </ul>
+</div>
+<div class="main">
+
+    {% block main %}
+    {% endblock %}
+</div>
+<div class="foot">
+    <div class="foot-top">
+        <h1>Weibw</h1>
+        <p>这一生波澜壮阔或者不惊都没问题</p>
+        <button type="button"><a href="mailto:weibw162@163.com" style="text-decoration: none;color: white;">联系我</a></button>
+    </div>
+    <div class="foot-btm" style="text-align: center">
+        <p style="margin-top: 20px;color: rgba(0,0,0,0.6)">本网站脚本皆属于用户上传，若对您造成不便请及时联系管理员，我们必定第一时间下线脚本</p>
+        <label>联系站主：</label><label>邮箱：<a href="mailto:weibw162@163.com" style="text-decoration: none;">weibw162@163.com</a></label>
+    </div>
+</div>
+
+
+</body>
+</html>

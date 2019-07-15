@@ -20,8 +20,20 @@ $(document).ready(function () {
     var test_id = window.location.href.substr(-2, 1);
 
     $(".like-btn").click(function () {
-        $(".fa-thumbs-o-up").css("color", "#32CD32");
-        $(".like-label").text("点赞+1")
+        // $(".fa-thumbs-o-up").css("color", "#32CD32");
+        // $(".like-label").text("点赞+1");
+        $.ajax({
+            url: "/like/" + test_id + "/",
+            async: false,
+            type: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            success: function (arg) {
+                if (arg == "like_True") {
+                    $(".fa-thumbs-o-up").css("color", "#32CD32");
+                    $(".like-label").text("点赞+1");
+                }
+            }
+        })
     })
 
     $("#script-content").focus(function () {
@@ -31,25 +43,60 @@ $(document).ready(function () {
     });
 
     $("#script-test-btn").click(function () {
-        $.ajax({
-            url: "/script-test/" + test_id+ '/',
-            async: false,
-            type: 'POST',
-            headers: {"Content-Type": "application/x-www-form-urlencoded"},
-            data: {
-                "wd": $("#wd").val(),
-            },
-            dataType: "JSON",
-            success: function (arg) {
-                $('#test-result').text(arg)
-            }
-        });
+        var val = $.trim($("#wd").val());
+        if (val == '') {
+            $("#wd").focus();
+            shake($("#wd"), "selectshake", 4);
+        }
+        else {
+            $.ajax({
+                url: "/script-test/" + test_id + '/',
+                async: false,
+                type: 'POST',
+                headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                data: {
+                    "wd": $("#wd").val(),
+                },
+                dataType: "JSON",
+                success: function (arg) {
+                    $('#test-result').text(arg);
+                    $(".script-result").show();
+                }
+            });
 
-        $(".script-result").show();
+
+        }
+
     });
 
+    function shake(ele, cls, times) {//边框闪烁
+        var i = 0, t = false, o = ele.attr("class") + " ", c = "", times = times || 2;
+        if (t) return;
+        t = setInterval(function () {
+            i++;
+            c = i % 2 ? o + cls : o;
+            ele.attr("class", c);
+            if (i == 2 * times) {
+                clearInterval(t);
+                ele.removeClass(cls);
+            }
+        }, 200);
+    };
+
     $("#comments-btn").click(function () {
-        $.ajax({
+
+        var requird = true;
+            $(".required").each(function () {
+                var val = $.trim($(this).val());
+                if (val == '') {
+                    $(this).focus();
+                    shake($(this), "selectshake", 4);
+                    requird = false;
+                    return false;
+                }
+            });
+            if (requird === true) {
+                $.ajax({
             url: '/comments/' + test_id + '/',
             async: false,
             type: 'POST',
@@ -76,14 +123,16 @@ $(document).ready(function () {
                 $("#script-content-true").val('');
                 $(".form-data").hide();
                 $("#script-content").show();
-                // <div class="script-comments-detail">
-                //         <img src="/media/{{ comments.comments_img }}"/>
-                //         <label class="script-comments-username">{{ comments.comments_name }}：</label>
-                //         <label class="script-comments-detail-content">{{ comments.content }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{ comments.add_time }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#{{ forloop.counter }}楼)</label>
-                //         <hr align="center"/>
-                //     </div>
             }
-        })
+        });
+            }else {
+                return false;
+            }
+
+
+
+
+
     })
 
 

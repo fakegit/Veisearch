@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+    {% block mainleft %}
+    {% endblock %}
+    <div class="box1">
+        <div class="box1-title">
+            <label><i class="fa fa-code"></i>脚本运行情况</label>
+        </div>
+        <div class="script-list-right">
+            <ul>
+                {% for spider in spider_list %}
+                    <li>
+                        <div class="script-execution">
+                            &nbsp;&nbsp;<a href="/script-detail/{{ spider.id }}">{{ spider.website_name }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a
+                                href="/script-list/{{ spider.spider_type.pk }}"
+                                style="color: #32CD32;">{{ spider.spider_type.name }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.author }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+                            {% if spider.spider_status == "success" %}
+                                <i class="fa fa-check-circle-o">正在运行</i>
+                            {% elif spider.spider_status == "failed" %}
+                                <i class="fa fa-times-circle-o">停止运行</i>
+                            {% elif spider.spider_status == "error" %}
+                                <i class="fa fa-exclamation-circle">出现意外</i>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="box2">
+        <div class="box1-title">
+            <label><i class="fa fa-commenting-o"></i>最新评论</label>
+        </div>
+        <div class="comments">
+            <ul>
+                {% for commments in comments_list %}
+                    <li>
+                        <div class="comments-info">
+                            <div class="comments-title">
+                                <label class="comments-name">{{ commments.comments_name }}</label>
+                                &nbsp;&nbsp;评论&nbsp;&nbsp;
+                                <a href="/script-detail/{{ commments.spider.id }}">{{ commments.spider.website_name }}</a>
+
+                                <label class="comments-time">{{ commments.add_time }}</label>
+
+                            </div>
+
+                            <div class="comments-detail">
+                                {{ commments.content }}
+                            </div>
+                            <hr/>
+                        </div>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+    <div class="box3">
+        <div class="box1-title">
+            <label><i class="fa fa-gear"></i>代理展示</label>
+        </div>
+        <div class="myscroll">
+            <ul>
+                {% for proxy in proxy_list %}
+                    <li>{{ proxy.proxy_ip }}@{{ proxy.proxy_type1 }}#[{{ proxy.proxy_type2 }}]{{ proxy.proxy_place }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
