@@ -7,8 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 from django.shortcuts import render, HttpResponse
 
 from .models import Spider_type, Spider, Comments, Spider_Error, Proxy, Broadcast, Shuffling
-from Email.audit_statusmod_mail import Comments_email
-
+from .tasks import comments_send_email
 
 def index(request):
     """
@@ -211,8 +210,7 @@ def comments(request, script_id):
 
     # 发送邮件
     if spider.allowed_email:
-        c_email = Comments_email(to_addr=spider.author_email,spider_id=spider.id,comments_addr=comments_email,comments_name=comments_name,comments_content=comments_content)
-        c_email.comments_email()
+        comments_send_email.delay(to_addr=spider.author_email,spider_id=spider.id,comments_addr=comments_email,comments_name=comments_name,comments_content=comments_content)
 
     new_comments = {}
     new_comments["comments_name"] = comments.comments_name

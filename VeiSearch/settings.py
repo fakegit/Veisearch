@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'vei.apps.VeiConfig',
+    'djcelery',
+
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,32 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 
+#############################
+# celery 配置信息 start
+#############################
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'redis://:v8686521@127.0.0.1:6379/1'
+CELERY_IMPORTS = ('vei.tasks')
+CELERY_TIMEZONE = 'Asia/Shanghai'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+from celery.schedules import crontab
+from celery.schedules import timedelta
+
+# CELERYBEAT_SCHEDULE = {    #定时器策略
+#     #定时任务一：　每隔30s运行一次
+#     u'测试定时器1': {
+#         "task": "art.tasks.tsend_email",
+#         #"schedule": crontab(minute='*/2'),  # or 'schedule':   timedelta(seconds=3),
+#         "schedule":timedelta(seconds=30),
+#         "args": (),
+#     },
+# }
+#############################
+# celery 配置信息 end
+#############################
+
+# 邮件配置
+FROM_ADDR = "weibw162@gmail.com"
+EMAIL_PASSWORD = "v8686521"
+EMAIL_SUBJECT = "微搜索"
