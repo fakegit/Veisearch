@@ -4,7 +4,7 @@ from .models import Spider_type, Spider,Comments,Spider_Error,Proxy,Broadcast,Sh
 
 from Email.audit_statusmod_mail import Send_email
 
-from .tasks import pass_audit_email,stop_running_eamil,error_eamil
+from .tasks import success_email,running_email,stop_eamil,error_eamil
 
 class Spider_typeAdmin(admin.ModelAdmin):
     list_display = ['name', 'data_format', 'add_time']
@@ -21,13 +21,14 @@ class SpiderAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         spider = Spider.objects.filter(pk=obj.id)[0]
         if spider.spider_status != obj.spider_status:
-
             if obj.spider_status == "success":
-                pass_audit_email.delay(obj.author_email,obj.id)
+                success_email.delay(obj.author_email,obj.id)
             elif obj.spider_status == "error":
                 error_eamil.delay(obj.author_email,obj.id)
-            elif obj.spider_status == "failed":
-                stop_running_eamil.delay(obj.author_email,obj.id)
+            elif obj.spider_status == "stop":
+                stop_eamil.delay(obj.author_email,obj.id)
+            elif obj.spider_status == "running":
+                running_email.delay(obj.author_email,obj.id)
         obj.save()
 
 

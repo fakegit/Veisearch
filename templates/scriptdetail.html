@@ -53,10 +53,29 @@
 					</code>
 				</pre>
         <form action="" id="script-test">
-            {% if spider.spider_status == "failed" %}
+            {% if spider.spider_status == "stop" %}
                 <label style="color: #FF0000;margin-left: 20px;">很抱歉！我们监测到此脚本在运行中多次出现问题，我们已经联系脚本作者，此脚本暂停测试功能。</label>
             {% endif %}
             {% if spider.spider_status == "success" %}
+                <fieldset>
+                    <legend>脚本测试</legend>
+                    {% if spider.spider_status == "error" %}
+                        <label style="color: #FF8C00;font-size: 12px;">我们监测到此脚本在运行中出现一些问题，不过这不影响您的测试。如果您在测试中多次出现未知错误请联系管理员。</label>
+                        <br><br>
+                    {% endif %}
+                    <label>输入搜索词：</label>
+                    <input type="text" name="wd" id="wd" required>
+                    <button type="button" id="script-test-btn">提交</button>
+                    <br/>
+                    <pre class="script-result">
+							<label>测试结果如下：</label>
+							<code class="json" id="test-result">
+
+							</code>
+						</pre>
+                </fieldset>
+            {% endif %}
+         {% if spider.spider_status == "running" %}
                 <fieldset>
                     <legend>脚本测试</legend>
                     {% if spider.spider_status == "error" %}

@@ -18,7 +18,9 @@
                                 style="color: #32CD32;">{{ spider.spider_type.name }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.author }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                             {% if spider.spider_status == "success" %}
                                 <i class="fa fa-check-circle-o">正在运行</i>
-                            {% elif spider.spider_status == "failed" %}
+                            {% elif spider.spider_status == "running" %}
+                                <i class="fa fa-check-circle-o">正在运行</i>
+                            {% elif spider.spider_status == "stop" %}
                                 <i class="fa fa-times-circle-o">停止运行</i>
                             {% elif spider.spider_status == "error" %}
                                 <i class="fa fa-exclamation-circle">出现意外</i>

@@ -83,7 +83,8 @@ $(document).ready(function () {
                     success:
                         function (arg) {
                            if (arg == "False"){
-                               $("#submit-btn").after('<label style="color: #FF0000;margin-left: 30px">验证码输入错误！</label>')
+                               $("#vercode-error").hide();
+                               $("#submit-btn").after('<label id="vercode-error" style="color: #FF0000;margin-left: 30px">验证码输入错误！</label>')
                            }
                            else {
                                window.location.href = "/upload-success/"

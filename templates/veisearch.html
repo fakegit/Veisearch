@@ -1,101 +1,510 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>微搜索</title>
-		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" />
-		<script src="{% static '/js/vue-2.4.0.js' %}"></script>
-		<link rel="stylesheet" type="text/css" href="{% static '/css/animate.css' %}" />
-		<script src="{% static '/js/vue-resource-1.3.4.js' %}"></script>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<style type="text/css">
-			.search {
-				/* background-color: red; */
-				min-height: 300px;
-			}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+    <title>微搜索~我们不存储资源，我们更不是资源的搬运工，我们只是为搬运工提供了住处</title>
+    {#		<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" />#}
+    <script src="{% static '/js/vue-2.4.0.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/animate.css' %}"/>
+    <script src="{% static '/js/vue-resource-1.3.4.js' %}"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/font-awesome-4.7.0/css/font-awesome.min.css' %}"/>
+    <style type="text/css">
 
-			.row1 {
-				margin-top: 100px;
-				text-align: center;
-			}
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
 
-			img {
-				width: 500px;
-				height: 200px;
-			}
-		</style>
-	</head>
-	<body>
-		<div id="app">
-			<div class="container">
-				<div class="row row1">
-					<div class="col-md-6 col-md-offset-3 search">
-						<img class="img-responsive center-block" src="{% static '/img/vei.gif' %}" />
-						<form class="form-inline">
-							<input type="text" class="form-control" v-model="wd" />
-							<button class="form-control btn-primary" type="button" @click="search">Vei</button>
-						</form>
-						<div class="table-responsive">
-							<table class="table table-bordered table-hover table-striped animated fadeInUpBig">
-								<thead>
-									<tr>
-										<th>电影名称</th>
-										<th>文件大小</th>
-										<th>下载</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr v-for="movie in movie_list" :key="movie.movie_name">
-										<td>{[ movie.movie_name ]}</td>
-										<td>{[ movie.movie_size ]}</td>
-										<td>
-											<a href="movie.movie_thunder">下载</a>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script>
-			Vue.http.options.root = "/search/"
-			var vm = new Vue({
-                delimiters:['{[', ']}'],
-				el: "#app",
-				data: {
-					wd: '',
-					movie_list: []
-				},
-				methods: {
-					search() {
-						axios.post('/search/', {'wd':this.wd} )
-							.then(resp => {
-								for(var i = 0;i<resp.data.length;i++){
-								    var movie_name = resp.data[i]["movie_name"];
-								    var movie_size = resp.data[i]["movie_size"];
-								    var movie_thunder = resp.data[i]["movie_thunder"];
-								    console.log(movie_name);
-								    this.movie_list.push({
+        #main {
+            max-width: 620px;
+            margin: auto auto;
+        }
 
-											movie_name: movie_name,
-											movie_size: movie_size,
-											movie_thunder: movie_thunder,
-										});
+        #header {
+            height: 52px;
+            width: 100%;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+            border: 1px solid #e7e7e7;
+
+        }
+
+        #footer {
+            position: absolute;
+            height: 52px;
+            width: 100%;
+            background-color: #8c8c8c;
+            bottom: 0;
+            text-align: center;
+
+        }
+
+        .footer-lab {
+            color: white;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        #navbar {
+            height: 50px;
+            max-width: 620px;
+            margin: auto auto;
+        {#background-color: #1b6d85;#} padding: 0 15px;
+        {#    margin-top: 12px;#}
+        }
+
+        #navbar-content {
+            margin: 13px 15px;
+
+        }
+
+        #con-lab1 {
+            font-size: 18px;
+            color: #32CD32;
+            margin-right: 0;
+
+        }
+
+        #con-lab2 {
+            float: right;
+            font-size: 18px;
+        }
+
+        #con-lab2 a {
+            color: #1E90FF;
+            text-decoration: none;
+        }
+
+        #main {
+            margin-top: 20px;
+        {#background-color: rgba(0,0,0,0.2);#}
+        }
+
+        #content {
+            margin: 0 15px;
+        }
+
+        #search {
+            width: 100%;
+        }
+
+        #choose-hand {
+            width: 100%;
+            font-size: 13px;
+            color: #B5B5B5;
+        }
+
+        #category {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .cate-a {
+            height: 25px;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.4);
+            margin-top: 5px;
+            border-radius: 3px;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            padding: 3px 5px;
+            outline-style: none;
+            text-decoration: none;
+        }
+
+        .cate-a.active {
+            color: white;
+            background-color: #32CD32;
+            border: 1px solid #32CD32;
+
+        }
+
+        #search-form {
+            height: 35px;
+            width: 100%;
+            margin-top: 15px;
+            position: relative;
+            clear: both;
+
+        }
+
+        #form-input {
+            width: 96%;
+            height: 20px;
+            padding: 5px 10px;
+            margin: 0;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            position: absolute;
+            z-index: 1;
+            right: 0;
+
+        }
+
+        #form-btn {
+            position: absolute;
+        {#margin-left: 200px;#} height: 32px;
+            right: 0;
+            font-size: 12px;
+            border-radius: 5px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            outline-style: none;
+            color: white;
+            display: inline-block;
+            background-color: #32CD32;
+            border: 1px solid #32CD32;
+            z-index: 999;
+        }
+
+        input::-webkit-input-placeholder, input:-moz-placeholder, input::-moz-placeholder, input::-ms-input-placeholder {
+            color: #B5B5B5;
+
+        }
+
+        #search-example {
+            width: 100%;
+            padding: 0 5px;
+        }
+
+        #hotwords, #result-label {
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .ex-a {
+            color: #1E90FF;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 12px;
+        }
+
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .tab {
+            margin: 0;
+            border: 1px solid #CCCCCC;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .tab-head {
+            background-color: rgba(30, 144, 255, 0.05);
+        }
+
+        .tab a {
+            text-decoration: none;
+        }
+
+        .tab-tb {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        tbody {
+            width: 100%;
+        }
+
+        td {
+            width: 27%;
+        }
+        #loading-img{
+            position: absolute;
+            margin: auto auto;
+
+        }
+
+        @media screen and (max-device-width: 420px) {
+            #header {
+                height: 45px;
+            }
+
+            #main {
+                margin-top: 5px;
+            }
+
+            #category {
+                margin-top: 5px;
+            }
+
+            #search-form {
+                margin-top: 10px;
+            }
+
+            .ex-a {
+                font-size: 8px;
+                color: rgba(30, 144, 255, 0.6);
+            }
+
+            .tab {
+                font-size: 8px;
+            }
+
+            td {
+                width: 25%;
+            }
+
+            #footer-lab {
+                font-size: 8px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div id="header">
+        <div id="navbar">
+            <div id="navbar-content">
+                <label id="con-lab1">微搜索</label>
+
+                <label id="con-lab2">
+                    <a href="/pro" target="_blank">搬运工宿舍</a>
+                </label>
+
+            </div>
+        </div>
+
+    </div>
+    <div id="main">
+        <div id="content">
+            <div id="search">
+                <div id="choose-hand">
+                    <i class="fa fa-hand-o-down"></i>点击选择搜索分类
+                </div>
+                <div id="category">
+                    <a class="cate-a active" href="javascript:void(0);" value="1"
+                       v-on:click="choose_cate">电影</a>
+                    <a class="cate-a" href="javascript:void(0);" value="2"
+                       v-on:click="choose_cate">百度网盘</a>
+
+                    <a class="cate-a" href="javascript:void(0);" value="3"
+                       v-on:click="choose_cate">音乐</a>
+                    <a class="cate-a" href="javascript:void(0);" value="4"
+                       v-on:click="choose_cate">磁力</a>
+
+
+                </div>
+                <form id="search-form" class="form-inline">
+                    <input type="text" id="form-input" v-bind:placeholder="ph" v-model="wd">
+                    <button type="button" id="form-btn" v-on:click="search">搜索</button>
+
+                </form>
+            </div>
+            <div id="search-example">
+                <label id="hotwords">热搜榜：</label>
+                <a href="javascript:void(0);" class="ex-a">斗穹</a>
+                <a href="javascript:void(0);" class="ex-a">斗破苍穹</a>
+                <a href="javascript:void(0);" class="ex-a">斗破fsfs苍穹</a>
+                <a href="javascript:void(0);" class="ex-a">斗dvs穹</a>
+                <a href="javascript:void(0);" class="ex-a">胡歌穹</a>
+                <a href="javascript:void(0);" class="ex-a">深化</a>
+                <a href="javascript:void(0);" class="ex-a">红虹猫蓝兔气息抓</a>
+                <a href="javascript:void(0);" class="ex-a">喜羊羊与与灰太狼</a>
+                <a href="javascript:void(0);" class="ex-a">斗破苍穹</a>
+                <a href="javascript:void(0);" class="ex-a">复仇者联盟</a>
+
+            </div>
+            <div id="search-result">
+                <label id="result-label">搜索结果：</label><br>
+                <table class="tab-tb" id="tab1" width="100%" border="0" align="center">
+                    <tbody>
+                    <tr>
+                        <td class="tab tab-head">电影名称</td>
+                        <td class="tab tab-head">资源大小</td>
+                        <td class="tab tab-head">视频来源</td>
+                        <td class="tab tab-head">迅雷下载与在线观看</td>
+                    </tr>
+                    <tr v-for="data in data_list">
+                        <td class="tab">{[ data.movie_name ]}</td>
+                        <td class="tab">{[ data.movie_size ]}</td>
+                        <td class="tab">{[ data.source ]}</td>
+                        <td class="tab">
+                            <a :href="data.movie_magnet">下载</a>/
+                            <a :href="data.movie_online_view_address" target="_blank">在线观看</a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+
+
+                </table>
+                <table class="tab-tb" id="tab2" width="100%" border="0" align="center">
+                    <tr>
+                        <td class="tab tab-head">资源名称</td>
+                        <td class="tab tab-head">资源大小</td>
+                        <td class="tab tab-head">云盘来源</td>
+                        <td class="tab tab-head">云盘连接</td>
+                    </tr>
+                    <tr v-for="data in data_list">
+                        <td class="tab">{[ data.file_name ]}</td>
+                        <td class="tab">{[ data.file_size ]}</td>
+                        <td class="tab">{[ data.source ]}</td>
+                        <td class="tab">
+                            <a :href="data.file_address" target="_blank">{[ data.file_address ]}</a>
+                        </td>
+
+                    </tr>
+                </table>
+                <table class="tab-tb" id="tab3" width="100%" border="0" align="center">
+                    <tr>
+                        <td class="tab tab-head">音乐名称</td>
+                        <td class="tab tab-head">文件大小</td>
+                        <td class="tab tab-head">文件来源</td>
+                        <td class="tab tab-head">下载连接</td>
+                    </tr>
+                    <tr>
+                        <td class="tab">幻听</td>
+                        <td class="tab">14M</td>
+                        <td class="tab">QQ音乐</td>
+                        <td class="tab">
+                            <a href="https://pan.baidu.com/mbox/homepage?short=b20rKi">下载</a>
+                        </td>
+
+                    </tr>
+
+                </table>
+                <img id="loading-img" src="{% static 'img/loading.gif' %}">
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <label class="footer-lab">我们不存储资源,我们也不是资源的搬运工</label><br>
+        <label class="footer-lab">我们只是为搬运工提供了居住地</label>
+
+    </div>
+
+</div>
+<script>
+    Vue.http.options.root = "/search/"
+    var vm = new Vue({
+        delimiters: ['{[', ']}'],
+        el: "#app",
+        data: {
+            wd: '',
+            data_list: [],
+            ph: "搜索电影资源",
+            cate: "1",
+
+        },
+        methods: {
+            choose_cate(event) {
+                this.cate = event.target.getAttribute("value");
+                if (this.cate == "1") {
+                    this.ph = "搜索电影资源"
+                }
+                else if (this.cate == "2") {
+                    this.ph = "搜索百度网盘资源"
+                }
+                else if (this.cate == "3") {
+                    this.ph = "搜索音乐资源"
+                }
+                else if (this.cate == "4") {
+                    this.ph = "搜索磁力资源"
+                }
+                var cate = document.getElementsByClassName('cate-a');
+                for (var i = 0; i < cate.length; i++) {
+                    cate[i].setAttribute("class", "cate-a");
+                }
+                event.target.setAttribute("class", "cate-a active");
+            },
+
+
+            search() {
+                axios({
+                    url: '/search/',
+                    method: 'POST',
+                    data: {
+                        'wd': this.wd, 'cate': this.cate
+                    },
+                    transformRequest: [function (data) {
+                        // Do whatever you want to transform the data
+                        let ret = '';
+                        for (let it in data) {
+                            // 如果要发送中文 编码
+                            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                        }
+                        return ret
+                    }],
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(resp => {
+                    this.data_list = [];
+                    for (var i = 0; i < resp.data.length; i++) {
+                        if (this.cate == "1") {
+                            this.data_list.push(
+                                {
+                                    movie_name: resp.data[i]["movie_name"],
+                                    movie_size: resp.data[i]["movie_size"],
+                                    movie_magnet: resp.data[i]["movie_magnet"],
+                                    movie_online_view_address: resp.data[i]["movie_online_view_address"],
+                                    source: resp.data[i]["source"],
+
                                 }
-							}).catch(err => {
-								console.log('请求失败：' + err.status + ',' + err.statusText);
-							});
-					},
-				}
+                            )
+                        }
+                        if (this.cate == "2") {
+                            this.data_list.push(
+                                {
+
+
+                                    file_name: resp.data[i]["file_name"],
+                                    file_size: resp.data[i]["file_size"],
+                                    file_address: resp.data[i]["file_address"],
+                                    source: resp.data[i]["source"],
+
+                                }
+                            )
+                        }
+                        if (this.cate == "3") {
+                            this.data_list.push(
+                                {
+                                    movie_name: resp.data[i]["movie_name"],
+                                    movie_size: resp.data[i]["movie_size"],
+                                    movie_magnet: resp.data[i]["movie_magnet"],
+                                    movie_online_view_address: resp.data[i]["movie_online_view_address"],
+                                    source: resp.data[i]["source"],
+
+                                }
+                            )
+                        }
+
+                    }
+
+                    var tab = document.getElementsByClassName("tab-tb");
+                    for (var i = 0; i < tab.length; i++) {
+                        tab[i].style.display = "none";
+                    }
+
+
+                    document.getElementById("tab" + this.cate).style.display = "block";
+
+                }).catch(err => {
+                    console.log('请求失败：' + err.status + ',' + err.statusText);
+                });
 
 
 
-			})
-		</script>
-	</body>
+            },
+        }
+
+
+    })
+</script>
+</body>
 </html>

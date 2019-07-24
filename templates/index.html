@@ -38,10 +38,10 @@
                 <label>评论总数量<i class="fa fa-search"></i></label>
                 <label class="data-nums">&nbsp;&nbsp;|&nbsp;&nbsp;{{ comments_count }}</label>
             </div>
-{#            <div class="data-info">#}
-{#                <label>今日搜索次数<i class="fa fa-search"></i></label>#}
-{#                <label class="data-nums">&nbsp;&nbsp;|&nbsp;&nbsp;200</label>#}
-{#            </div>#}
+            <div class="data-info">
+                <label>系统已装Python库数量<i class="fa fa-search"></i></label>
+                <label class="data-nums">&nbsp;&nbsp;|&nbsp;&nbsp;{{ pack_list_count }}</label>
+            </div>
             <div class="data-info">
                 <label>站主QQ<i class="fa fa-quora"></i></label>
                 <label class="data-nums">&nbsp;&nbsp;|&nbsp;&nbsp;1638852930</label>
@@ -113,7 +113,9 @@
                                 style="color: #32CD32;">{{ spider.spider_type.name }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;{{ spider.author }}&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
                             {% if spider.spider_status == "success" %}
                                 <i class="fa fa-check-circle-o">正在运行</i>
-                            {% elif spider.spider_status == "failed" %}
+                            {% elif spider.spider_status == "running" %}
+                                <i class="fa fa-check-circle-o">正在运行</i>
+                            {% elif spider.spider_status == "stop" %}
                                 <i class="fa fa-times-circle-o">停止运行</i>
                             {% elif spider.spider_status == "error" %}
                                 <i class="fa fa-exclamation-circle">出现意外</i>

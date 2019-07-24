@@ -30,9 +30,10 @@ class Spider(models.Model):
     爬虫详情
     """
     SPIDER_STATUS = (
-        ('success', '正在运行'),
+        ('success','审核通过'),
+        ('running', '正在运行'),
         ('error', '出现问题'),
-        ('failed', '停止运行')
+        ('stop', '停止运行')
     )
 
     name = models.CharField(verbose_name="爬虫名称", max_length=30)
@@ -48,9 +49,10 @@ class Spider(models.Model):
     view_num = models.IntegerField(verbose_name="浏览次数", default=0)
     like_num = models.IntegerField(verbose_name="点赞次数", default=0)
     comments_num = models.IntegerField(verbose_name="评论数", default=0)
-    spider_status = models.CharField(verbose_name="爬虫状态", choices=SPIDER_STATUS, default='failed', max_length=30)
+    spider_status = models.CharField(verbose_name="爬虫状态", choices=SPIDER_STATUS, default='stop', max_length=30)
     error_num = models.IntegerField(verbose_name="出错次数", default=0)
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
+
 
     def save(self, *args, **kwargs):
         # 如果用户未上传网站图片
@@ -59,7 +61,7 @@ class Spider(models.Model):
         # 如果爬虫脚本出现错误超过50次
         if self.error_num >= 50:
             if self.error_num >= 100:
-                self.spider_status = 'failed'
+                self.spider_status = 'stop'
             else:
                 self.spider_status = 'error'
 
@@ -102,11 +104,11 @@ class Spider_Error(models.Model):
     def save(self, *args, **kwargs):
         spider = Spider.objects.get(spider=self.spider)
         spider.error_num += 1
-        if spider.error_num >= 50:
-            if spider.error_num >= 100:
-                spider.spider_status = 'failed'
-            else:
-                spider.spider_status = 'error'
+        # if spider.error_num >= 50:
+        #     if spider.error_num >= 100:
+        #         spider.spider_status = 'failed'
+        #     else:
+        #         spider.spider_status = 'error'
         spider.save()
 
         super(Spider_Error, self).save(*args, **kwargs)

@@ -9,14 +9,19 @@ from django.shortcuts import render, HttpResponse
 from .models import Spider_type, Spider, Comments, Spider_Error, Proxy, Broadcast, Shuffling
 from .tasks import comments_send_email
 
+
 def index(request):
     """
     首页
     :param request:
     :return:
     """
-    broadcast = Broadcast.objects.filter(is_used=True)[0]
-    shuffling_list = Shuffling.objects.filter(is_used=True)[:6]
+    broadcast = Broadcast.objects.filter(is_used=True)
+    if broadcast.exists():
+        broadcast = broadcast[0]
+    shuffling_list = Shuffling.objects.filter(is_used=True)
+    if shuffling_list.exists():
+        shuffling_list = shuffling_list[:6]
     spider_list = Spider.objects.all().order_by("-add_time")
     pack_list = []
     with open(r'.\requirements.txt') as f:
@@ -35,9 +40,10 @@ def index(request):
         "spider_count": len(spider_list),
         "spider_list": spider_list,
         "pack_list": pack_list,
+        "pack_list_count": len(pack_list),
         "comments_list": comments_list[:20],
         "proxy_list": proxy_list,
-        "comments_count":len(comments_list),
+        "comments_count": len(comments_list),
     }
 
     return render(request, 'index.html', context)
@@ -76,7 +82,6 @@ def upload_file(request):
     if request.is_ajax():
         vercode_session = request.session["vercode"]
         vercode_content = request.POST.get('vercode')
-        print(vercode_content,vercode_session)
         if vercode_session != vercode_content:
             return HttpResponse("False")
         else:
@@ -109,8 +114,7 @@ def upload_file(request):
 
 
 def upload_success(request):
-    return render(request,"upload_success.html")
-
+    return render(request, "upload_success.html")
 
 
 def scriptdetail(request, script_id):
@@ -210,7 +214,8 @@ def comments(request, script_id):
 
     # 发送邮件
     if spider.allowed_email:
-        comments_send_email.delay(to_addr=spider.author_email,spider_id=spider.id,comments_addr=comments_email,comments_name=comments_name,comments_content=comments_content)
+        comments_send_email.delay(to_addr=spider.author_email, spider_id=spider.id, comments_addr=comments_email,
+                                  comments_name=comments_name, comments_content=comments_content)
 
     new_comments = {}
     new_comments["comments_name"] = comments.comments_name
@@ -320,25 +325,72 @@ def getvercode(request):
     return HttpResponse(data)
 
 
-
-
 def veisearch(request):
     return render(request, 'veisearch.html')
 
 
 def search(request):
     wd = ''
-    if request.method == "POST":
-        wd = request.body.decode("utf-8")[7:-2]
-    print(type(wd))
-    print(wd)
+    cate = ''
     result = []
-    spider_list = Spider.objects.all()
+    if request.method == "POST":
+        wd = request.POST.get("wd")
+        cate = request.POST.get("cate")
+    if cate == "1":
+        result = [
+            {
+                "movie_name": "斗破苍穹1",
+                "movie_size": "1G",
+                "movie_magnet": "magnet:?xt=urn:btih:37615843018579q593809",
+                "movie_online_view_address": "https://bili.meijuzuida.com/share/8a27c2ddc3d3fe74aa037f4b7d262e34",
+                "source": "80s电影网",
+            },
+            {
+                "movie_name": "斗破苍穹2",
+                "movie_size": "420M",
+                "movie_magnet": "magnet:?xt=urn:btih:37615843018579q593809",
+                "movie_online_view_address": "https://bili.meijuzuida.com/share/8a27c2ddc3d3fe74aa037f4b7d262e34",
+                "source": "电影天堂",
+            },
+            {
+                "movie_name": "斗破苍穹3",
+                "movie_size": "25kB",
+                "movie_magnet": "magnet:?xt=urn:btih:37615843018579q593809",
+                "movie_online_view_address": "https://bili.meijuzuida.com/share/8a27c2ddc3d3fe74aa037f4b7d262e34",
+                "source": "80s电影网",
+            },
 
-    for spider in spider_list:
-        model = importlib.import_module('media.spider_files.' + spider.name[:-3])
-        obj = getattr(model, spider.name[:-3])(wd)
-        result = obj.output_data()
-        print(result)
+        ]
+    if cate == "2":
+        result = [
+            {
+                "file_name": "斗破苍穹1",
+                "file_size": "1G",
+                "file_address": "https://pan.baidu.com/mbox/homepage?short=b20rKi",
+                "source": "80s电影网",
+            },
+            {
+                "file_name": "斗破苍穹1",
+                "file_size": "222M",
+                "file_address": "https://pan.baidu.com/mbox/homepage?short=b20rKi",
+                "source": "百度云",
+            },
+            {
+                "file_name": "斗破苍穹1",
+                "file_size": "12kb",
+                "file_address": "https://pan.baidu.com/mbox/homepage?short=b20rKi",
+                "source": "盘多多",
+            },
+
+
+        ]
+
+    # spider_list = Spider.objects.all()
+
+    # for spider in spider_list:
+    #     model = importlib.import_module('media.spider_files.' + spider.name[:-3])
+    #     obj = getattr(model, spider.name[:-3])(wd)
+    #     result = obj.output_data()
+    #     print(result)
 
     return HttpResponse(json.dumps(result))

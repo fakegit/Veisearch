@@ -6,16 +6,16 @@ from email.mime.text import MIMEText
 
 from celery.utils.log import get_task_logger
 from celeryapp import app
-from VeiSearch.settings import FROM_ADDR,EMAIL_PASSWORD,EMAIL_SUBJECT
+from VeiSearch.settings import FROM_ADDR,EMAIL_PASSWORD
 
 @app.task
-def pass_audit_email(to_addr, spider_id):
+def success_email(to_addr, spider_id):
 
     def send_email(msg_HTML):
         msg = MIMEText(msg_HTML, 'html', 'utf-8')
         msg['From'] = Header('微搜索<%s>' % FROM_ADDR)
         msg['To'] = Header('菜菜鸡<%s>' % to_addr)
-        msg['Subject'] = EMAIL_SUBJECT
+        msg['Subject'] = "审核通过"
 
         smtp = smtplib.SMTP('smtp.gmail.com', 587)
         smtp.set_debuglevel(1)
@@ -41,13 +41,46 @@ def pass_audit_email(to_addr, spider_id):
     send_email(msg_HTML=msg_HTML)
 
 @app.task
-def stop_running_eamil(to_addr, spider_id):
+def running_email(to_addr, spider_id):
 
     def send_email(msg_HTML):
         msg = MIMEText(msg_HTML, 'html', 'utf-8')
         msg['From'] = Header('微搜索<%s>' % FROM_ADDR)
         msg['To'] = Header('菜菜鸡<%s>' % to_addr)
-        msg['Subject'] = EMAIL_SUBJECT
+        msg['Subject'] = "恢复运行"
+
+        smtp = smtplib.SMTP('smtp.gmail.com', 587)
+        smtp.set_debuglevel(1)
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.login(FROM_ADDR, EMAIL_PASSWORD)
+        smtp.sendmail(FROM_ADDR, [to_addr], msg.as_string())
+
+    msg_HTML = """
+            <div style="text-align: center;">
+    			<h2 style="color: #FF0000;">感谢您的投稿</h2>
+    			<h3>您的脚本已经恢复正常运行！</h3>
+    			<p>您可以在
+    				<a href="https://www.veisearch.com" style="color: #1E90FF; text-decoration: none;">微搜索开发者页面</a>
+    				测试您的脚本
+    			</p>
+    			<p>您的脚本连接如下：
+    				<a href="https://www.veisearch.com/script-detail/{}/" style="color: #6495ED;text-decoration: none;">脚本地址</a>
+    			</p>
+    			<h2>再次感谢您的投稿</h2>
+    		</div>
+            """.format(spider_id)
+    send_email(msg_HTML=msg_HTML)
+
+
+@app.task
+def stop_eamil(to_addr, spider_id):
+
+    def send_email(msg_HTML):
+        msg = MIMEText(msg_HTML, 'html', 'utf-8')
+        msg['From'] = Header('微搜索<%s>' % FROM_ADDR)
+        msg['To'] = Header('菜菜鸡<%s>' % to_addr)
+        msg['Subject'] = "停止运行"
 
         smtp = smtplib.SMTP('smtp.gmail.com', 587)
         smtp.set_debuglevel(1)
@@ -78,7 +111,7 @@ def error_eamil(to_addr, spider_id):
         msg = MIMEText(msg_HTML, 'html', 'utf-8')
         msg['From'] = Header('微搜索<%s>' % FROM_ADDR)
         msg['To'] = Header('菜菜鸡<%s>' % to_addr)
-        msg['Subject'] = EMAIL_SUBJECT
+        msg['Subject'] = "错误处理"
 
         smtp = smtplib.SMTP('smtp.gmail.com', 587)
         smtp.set_debuglevel(1)
@@ -110,7 +143,7 @@ def comments_send_email(to_addr, spider_id, comments_addr, comments_name, commen
        msg = MIMEText(msg_HTML, 'html', 'utf-8')
        msg['From'] = Header('微搜索<%s>' % FROM_ADDR)
        msg['To'] = Header('菜菜鸡<%s>' % to_addr)
-       msg['Subject'] = EMAIL_SUBJECT
+       msg['Subject'] = "脚本评论"
 
        smtp = smtplib.SMTP('smtp.gmail.com', 587)
        smtp.set_debuglevel(1)
