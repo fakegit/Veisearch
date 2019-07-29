@@ -1,12 +1,29 @@
 from __future__ import absolute_import
-import time
 import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 
-from celery.utils.log import get_task_logger
-from celeryapp import app
+from Celery_app.celeryapp import app
 from VeiSearch.settings import FROM_ADDR,EMAIL_PASSWORD
+from proxy_spider.proxy_spider import ProxySpider
+
+
+@app.task
+def getproxy():
+    from .models import Proxy
+    proxy_spider = ProxySpider()
+    proxy_list = proxy_spider.main()
+    proxy_obj_list = []
+    for item in proxy_list:
+        proxy = Proxy()
+        proxy.proxy_ip = item["re1"]
+        proxy.proxy_type1 = item["re2"]
+        proxy.proxy_type2 = item["re3"]
+        proxy.proxy_place = item["re4"][:10]
+        proxy_obj_list.append(proxy)
+    Proxy.objects.all().delete()
+    Proxy.objects.bulk_create(proxy_obj_list)
+
 
 @app.task
 def success_email(to_addr, spider_id):

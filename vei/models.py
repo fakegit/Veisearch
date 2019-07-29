@@ -14,7 +14,6 @@ class Spider_type(models.Model):
     """
     name = models.CharField(verbose_name="类型名", max_length=30, )
     data_format = models.TextField(verbose_name="数据返回格式", max_length=500, )
-
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
 
     def __str__(self):
@@ -30,7 +29,7 @@ class Spider(models.Model):
     爬虫详情
     """
     SPIDER_STATUS = (
-        ('success','审核通过'),
+        ('success', '审核通过'),
         ('running', '正在运行'),
         ('error', '出现问题'),
         ('stop', '停止运行')
@@ -52,7 +51,6 @@ class Spider(models.Model):
     spider_status = models.CharField(verbose_name="爬虫状态", choices=SPIDER_STATUS, default='stop', max_length=30)
     error_num = models.IntegerField(verbose_name="出错次数", default=0)
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
-
 
     def save(self, *args, **kwargs):
         # 如果用户未上传网站图片
@@ -97,19 +95,18 @@ class Spider_Error(models.Model):
     报错
     """
     spider = models.ForeignKey("Spider", verbose_name="出错爬虫", on_delete=models.CASCADE, )
-    Error_content = models.CharField(verbose_name="报错内容", max_length=500)
+    error_content = models.CharField(verbose_name="报错内容", max_length=500)
 
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
 
     def save(self, *args, **kwargs):
-        spider = Spider.objects.get(spider=self.spider)
-        spider.error_num += 1
+        self.spider.error_num += 1
         # if spider.error_num >= 50:
         #     if spider.error_num >= 100:
         #         spider.spider_status = 'failed'
         #     else:
         #         spider.spider_status = 'error'
-        spider.save()
+        self.spider.save()
 
         super(Spider_Error, self).save(*args, **kwargs)
 
@@ -122,19 +119,11 @@ class Proxy(models.Model):
     """
     代理
     """
-    PROXY_TYPE1 = (
-        ("HTTP", "HTTP"),
-        ("HTTPS", "HTTP")
-    )
-    PROXY_TYPE2 = (
-        ("未知", "未知"),
-        ("高匿", "高匿"),
-        ("普匿", "普匿")
-    )
+
 
     proxy_ip = models.CharField(verbose_name="代理IP", max_length=30)
-    proxy_type1 = models.CharField(verbose_name="代理类型", choices=PROXY_TYPE1, default="HTTP", max_length=10)
-    proxy_type2 = models.CharField(verbose_name="代理类型", choices=PROXY_TYPE2, default="未知", max_length=10)
+    proxy_type1 = models.CharField(verbose_name="代理类型",  default="HTTP", max_length=10)
+    proxy_type2 = models.CharField(verbose_name="代理类型",  default="未知", max_length=10)
     proxy_place = models.CharField(verbose_name="地区", max_length=100)
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
 
@@ -142,29 +131,49 @@ class Proxy(models.Model):
         verbose_name = "代理"
         verbose_name_plural = verbose_name
 
+
 class Broadcast(models.Model):
     """
     播报
     """
-    cast_content = models.CharField(verbose_name="播报内容",max_length=300)
-    is_used = models.BooleanField(verbose_name="是否启用",default=True)
+    cast_content = models.CharField(verbose_name="播报内容", max_length=300)
+    is_used = models.BooleanField(verbose_name="是否启用", default=True)
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
 
     def save(self, *args, **kwargs):
-        Broadcast.objects.update(is_used = False)
+        Broadcast.objects.update(is_used=False)
         super(Broadcast, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name = "播报"
         verbose_name_plural = verbose_name
+
 
 class Shuffling(models.Model):
     """
     轮播图
     """
-    img = models.ImageField(verbose_name="轮播图",upload_to='shuffling_imgs/')
-    is_used = models.BooleanField(verbose_name="是否启用",default=True)
+    img = models.ImageField(verbose_name="轮播图", upload_to='shuffling_imgs/')
+    is_used = models.BooleanField(verbose_name="是否启用", default=True)
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
 
     class Meta:
         verbose_name = "轮播图"
         verbose_name_plural = verbose_name
+
+class Search(models.Model):
+    """
+    用户搜索记录
+    """
+    user_ip = models.CharField(verbose_name="用户ip",max_length=100)
+    search_type = models.ForeignKey("Spider_type",verbose_name="搜索类型",on_delete=models.CASCADE)
+    wd = models.CharField(verbose_name="搜索词条",max_length=100)
+    add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
+
+    def __str__(self):
+        return self.wd
+
+    class Meta:
+        verbose_name = "用户搜索记录"
+        verbose_name_plural = verbose_name
+

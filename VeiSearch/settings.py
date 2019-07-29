@@ -143,27 +143,33 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 #############################
 import djcelery
 djcelery.setup_loader()
-BROKER_URL = 'redis://:v8686521@127.0.0.1:6379/1'
+BROKER_URL = 'redis://:v8686521@127.0.0.1:6379/1' # redis地址
 CELERY_IMPORTS = ('vei.tasks')
 CELERY_TIMEZONE = 'Asia/Shanghai'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 from celery.schedules import crontab
 from celery.schedules import timedelta
 
-# CELERYBEAT_SCHEDULE = {    #定时器策略
-#     #定时任务一：　每隔30s运行一次
-#     u'测试定时器1': {
-#         "task": "art.tasks.tsend_email",
-#         #"schedule": crontab(minute='*/2'),  # or 'schedule':   timedelta(seconds=3),
-#         "schedule":timedelta(seconds=30),
-#         "args": (),
-#     },
-# }
+CELERYBEAT_SCHEDULE = {    #定时器策略
+    #定时任务一：　每隔30s运行一次
+    u'测试定时器1': {
+        "task": "vei.tasks.getproxy",
+        "schedule": crontab(minute=30, hour=0),  # or 'schedule':   timedelta(seconds=3),
+        # "schedule":timedelta(seconds=30),
+        "args": (),
+    },
+}
 #############################
 # celery 配置信息 end
 #############################
 
 # 邮件配置
-FROM_ADDR = "weibw162@gmail.com"
-EMAIL_PASSWORD = "v8686521"
+FROM_ADDR = "******"    #邮箱账号
+EMAIL_PASSWORD = "******"  #邮箱密码
 EMAIL_SUBJECT = "微搜索"
+
+# 允许session存queryset对象
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+# 设置session过期时间，关闭浏览器session过期
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

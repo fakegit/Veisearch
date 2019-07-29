@@ -43,6 +43,10 @@
                 <label class="data-nums">&nbsp;&nbsp;|&nbsp;&nbsp;{{ pack_list_count }}</label>
             </div>
             <div class="data-info">
+                <label>系统库中代理数量<i class="fa fa-search"></i></label>
+                <label class="data-nums">&nbsp;&nbsp;|&nbsp;&nbsp;{{ proxy_count }}</label>
+            </div>
+            <div class="data-info">
                 <label>站主QQ<i class="fa fa-quora"></i></label>
                 <label class="data-nums">&nbsp;&nbsp;|&nbsp;&nbsp;1638852930</label>
             </div>
@@ -135,12 +139,17 @@
             <label><i class="fa fa-briefcase"></i>系统已安装Python库</label>
         </div>
         <div class="package-list">
-            {% for pack in pack_list %}
-                <div class="package">
-                    <label class="package-name">{{ pack.pack_name }}</label>
-                    <label class="package-version">{{ pack.pack_ver }}</label>
-                </div>
-            {% endfor %}
+            <ul>
+                {% for pack in pack_list %}
+                    <li>
+                        <div class="package">
+                            <label class="package-name">{{ pack.pack_name }}</label>
+                            <label class="package-version">{{ pack.pack_ver }}</label>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
 
         </div>
     </div>
