@@ -82,7 +82,7 @@
                         <td class="tab">{[ data.movie_size ]}</td>
                         <td class="tab">{[ data.source ]}</td>
                         <td class="tab">
-                            <a :href="data.thunder_link">下载</a>/
+                            <a :href="data.movie_thunder">下载</a>/
                             <a v-if="data.movie_online_view_address != ''" :href="data.movie_online_view_address"
                                target="_blank">在线观看</a>
                         </td>
@@ -210,8 +210,14 @@
                     this.shake(search_input, "selectshake", 4);
                     return false;
                 }
+                this.data_list = [];
+                    var tab = document.getElementsByClassName("tab-tb");
+                    for (var i = 0; i < tab.length; i++) {
+                        tab[i].style.display = "none";
+                    }
                 document.getElementById("search-result").style.backgroundImage = "none";
                 document.getElementById("loading-div").style.display = "block";
+
                 this.result_count = 0;
                 axios({
                     url: '/search/',
@@ -232,11 +238,7 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }).then(resp => {
-                    this.data_list = [];
-                    var tab = document.getElementsByClassName("tab-tb");
-                    for (var i = 0; i < tab.length; i++) {
-                        tab[i].style.display = "none";
-                    }
+
                     if (resp.data.length == 0) {
                         document.getElementById("result-count").style.display = "block";
                     }
@@ -248,7 +250,7 @@
                                     {
                                         movie_name: resp.data[i]["movie_name"],
                                         movie_size: resp.data[i]["movie_size"],
-                                        thunder_link: resp.data[i]["thunder_link"],
+                                        movie_thunder: resp.data[i]["movie_thunder"],
                                         movie_online_view_address: resp.data[i]["movie_online_view_address"],
                                         source: resp.data[i]["source"],
                                     }

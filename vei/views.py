@@ -250,10 +250,17 @@ def script_test(request, script_id):
     wd = ''
     if request.is_ajax():
         wd = request.POST.get('wd')
+    result=[]
     spider = Spider.objects.filter(pk=script_id).first()
-    model = importlib.import_module('media.spider_files.' + spider.name[:-3])  # 根据"auth.my_auth"导入my_auth模块
-    obj = getattr(model, spider.name[:-3])(wd)  # 反射并实例化
-    result = obj.output_data()
+    try:
+        model = importlib.import_module('media.spider_files.' + spider.name[:-3])  # 根据"auth.my_auth"导入my_auth模块
+        obj = getattr(model, spider.name[:-3])(wd)  # 反射并实例化
+        result = obj.output_data()
+    except Exception as e:
+        spider_error = Spider_Error()
+        spider_error.spider = spider
+        spider_error.error_content = repr(e)
+        spider_error.save()
     # result = "测试成功"
 
     return HttpResponse(json.dumps(result))
@@ -414,6 +421,16 @@ def getvercode(request):
     vercode,data = createvercode()
     request.session["vercode"] = vercode
     return HttpResponse(data)
+
+def getproxy(request):
+    proxy_list = []
+    proxy_q_list = Proxy.objects.filter(proxy_type1="HTTP",is_check=True)[:100]
+    for proxy in proxy_q_list:
+        proxy_list.append("http://"+proxy.proxy_ip)
+    return HttpResponse(json.dumps(list(set(proxy_list))))
+
+    # Proxy.objects.all().delete()
+
 
 
 def veisearch(request):

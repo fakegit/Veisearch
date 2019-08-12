@@ -38,7 +38,7 @@ class ErrorAdmin(admin.ModelAdmin):
     list_display = ['spider','error_content','add_time']
 
 class ProxyAdmin(admin.ModelAdmin):
-    list_display = ["pk","proxy_ip","proxy_type1","proxy_type2","add_time"]
+    list_display = ["pk","proxy_ip","is_check","proxy_type1","proxy_type2","add_time"]
 
 class BroadcastAdmin(admin.ModelAdmin):
     list_display = ["pk","cast_content","is_used","add_time"]

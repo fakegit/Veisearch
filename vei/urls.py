@@ -15,5 +15,6 @@ urlpatterns = [
     path('like/<int:script_id>/',views.like),
     path('script-list/<int:script_type_id>/',views.script_list),
     path('vercode/',views.getvercode),
+    path('proxy/',views.getproxy),
 
 ]

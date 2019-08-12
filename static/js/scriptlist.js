@@ -17,7 +17,7 @@ $(function () {
 });
 $(document).ready(function () {
 
-    var test_id = window.location.href.substr(-2, 1);
+    var test_id = window.location.href.split('/')[4];
 
     $(".like-btn").click(function () {
         // $(".fa-thumbs-o-up").css("color", "#32CD32");
@@ -43,6 +43,7 @@ $(document).ready(function () {
     });
 
     $("#script-test-btn").click(function () {
+        alert(test_id);
         var val = $.trim($("#wd").val());
         if (val == '') {
             $("#wd").focus();

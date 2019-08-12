@@ -784,3 +784,13 @@ fieldset button:hover {
 .form-data {
     display: none;
 }
+@media screen and (max-device-width: 420px) {
+    .head {
+        width: 1200px;
+        /* position: fixed; */
+    }
+
+    .foot {
+        width: 1200px;
+    }
+}

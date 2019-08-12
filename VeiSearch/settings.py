@@ -16,7 +16,6 @@ import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'tvka+3f&jxy-voyggr769!@9u8&s+v20%_og#didkdmvs5@16x'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -75,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'VeiSearch.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -88,7 +85,6 @@ DATABASES = {
         "HOST": "127.0.0.1",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -108,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -122,40 +117,44 @@ USE_L10N = True
 
 USE_TZ = False
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-   os.path.join(BASE_DIR,"static")
- ]
+    os.path.join(BASE_DIR, "static")
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
-
 
 #############################
 # celery 配置信息 start
 #############################
 import djcelery
+
 djcelery.setup_loader()
-BROKER_URL = 'redis://:v8686521@127.0.0.1:6379/1' # redis地址
+BROKER_URL = 'redis://:v8686521@127.0.0.1:6379/1'
 CELERY_IMPORTS = ('vei.tasks')
 CELERY_TIMEZONE = 'Asia/Shanghai'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 from celery.schedules import crontab
 from celery.schedules import timedelta
 
-CELERYBEAT_SCHEDULE = {    #定时器策略
-    #定时任务一：　每隔30s运行一次
+CELERYBEAT_SCHEDULE = {  # 定时器策略
+    # 定时任务一：　每隔30s运行一次
     u'测试定时器1': {
         "task": "vei.tasks.getproxy",
-        "schedule": crontab(minute=30, hour=0),  # or 'schedule':   timedelta(seconds=3),
-        # "schedule":timedelta(seconds=30),
+        # "schedule": crontab(minute=30, hour=0),  # or 'schedule':   timedelta(seconds=3),
+        "schedule": timedelta(minutes=10),
+        "args": (),
+    },
+    u'测试定时器2': {
+        "task": "vei.tasks.proxytest",
+        # "schedule": crontab(minute=30, hour=0),  # or 'schedule':   timedelta(seconds=3),
+        "schedule": timedelta(minutes=10),
         "args": (),
     },
 }
@@ -164,8 +163,8 @@ CELERYBEAT_SCHEDULE = {    #定时器策略
 #############################
 
 # 邮件配置
-FROM_ADDR = "******"    #邮箱账号
-EMAIL_PASSWORD = "******"  #邮箱密码
+FROM_ADDR = "weibw162@gmail.com"
+EMAIL_PASSWORD = "v8686521"
 EMAIL_SUBJECT = "微搜索"
 
 # 允许session存queryset对象

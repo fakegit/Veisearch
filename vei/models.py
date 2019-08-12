@@ -125,6 +125,7 @@ class Proxy(models.Model):
     proxy_type1 = models.CharField(verbose_name="代理类型",  default="HTTP", max_length=10)
     proxy_type2 = models.CharField(verbose_name="代理类型",  default="未知", max_length=10)
     proxy_place = models.CharField(verbose_name="地区", max_length=100)
+    is_check = models.BooleanField(verbose_name="是否已检查",default=False)
     add_time = models.DateTimeField(verbose_name="添加时间", default=datetime.now)
 
     class Meta:
