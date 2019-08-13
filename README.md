@@ -6,6 +6,8 @@
 仅界面演示，上传脚本并未执行。由于并未找到可靠的免费代理池，而我写脚本爬取的网站对访问限制比较严重，所以多次尝试后最终放弃在服务器上运行，不过本地运行完全可以。
 + 开发者后台地址：[http://www.veisearch.com/pro/](http://www.veisearch.com/pro/)  
 用户可以在后台开发者页面浏览其他用户上传的脚本，并对脚本进行相应的测试，评论，点赞等操作。
++ 代理接口地址：[http://www.veisearch.com/proxy/](http://www.veisearch.com/proxy/)  
+将数据库中有效的代理开放给用户在脚本中使用。
 + 网站后台地址：[http://www.veisearch.com/admin/](http://www.veisearch.com/admin/)  
 后台采用开源框架[django-simpleui](https://github.com/newpanjing/simpleui)，一款基于vue+element-ui的django admin现代化主题。
   - 账号：admin
@@ -56,6 +58,7 @@
       }
     ```
 8. 验证码。使用Pillow模块生成验证码，前端ajax异步调用获取验证码信息（图片及code），将code存入session中用于提交时验证。
+9. 代理接口。定时任务自动筛选出可使用的代理，设置一个接口供用户脚本使用。用户每次访问接口可以获取到最新的100条可用代理（若不足100条则有多少显示多少）
 ### 代理脚本示例
 + [89免费代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_89ip.py)--->[官网地址](http://www.89ip.cn/)
 + [西刺代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_xici.py)--->[官网地址](https://www.xicidaili.com/)
