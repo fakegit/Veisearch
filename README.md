@@ -10,28 +10,19 @@
   - 密码：admin123456
 
 ### 网站页面展示
-+ 搜索页（PC端）
-
++ 搜索页（PC端）  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/index_pc.PNG)
-+ 搜索页（移动端）
-
++ 搜索页（移动端）  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/index_m.PNG)
-+ 搜索结果展示（PC端）
-
++ 搜索结果展示（PC端）  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/result_pc.PNG)
-
-+ 搜索结果展示（移动端）
++ 搜索结果展示（移动端）  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/result_m.PNG)
-
-+ 开发者后台首页（PC端）
++ 开发者后台首页（PC端）  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/pro_pc.PNG)
-
-+ 开发者后台首页（完整展示移动端）
++ 开发者后台首页（完整展示移动端）  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/pro_m.jpg)
-
-+ 脚本上传页
++ 脚本上传页  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/upload.jpg)
-
-+ 脚本详情页
-
++ 脚本详情页  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/detail.jpg)
