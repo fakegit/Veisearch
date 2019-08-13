@@ -27,7 +27,11 @@
 ]
 ```
 4. 脚本列表页。分类展示脚本信息。
-5. 脚本详情页。对于不同状态的脚本，会有不同状态的展示，主要体现在脚本测试方面。除此之外，用户可以对脚本进行无登录点赞及评论操作。注意，点赞数据亦存储在session中。
+5. 脚本详情页。对于不同状态的脚本，会有不同状态的展示，主要体现在脚本测试方面。除此之外，用户可以对脚本进行无登录点赞及评论操作。注意，点赞数据亦存储在session中。展示不同之处如下：
+![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/success.PNG)  
+![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/error.PNG)  
+![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/stop.PNG)
+
 6. 脚本报错记录。无论用户执行搜索或者在后太对单个脚本进行调试，只要脚本运行系统都会对脚本进行监测，一旦报错会立马记录在数据库。当报错记录超过50条系统会自动修改脚本的状态为`error`，即`出现问题`。同理，当报错记录超过100条系统会自动修改脚本的状态为`stop`，即`停止运行`，并停止脚本的运行。
 7. Celery+redis任务管理。  
     1. 邮件任务
