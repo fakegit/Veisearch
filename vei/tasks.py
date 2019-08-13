@@ -1,15 +1,16 @@
 from __future__ import absolute_import
+import asyncio
+import aiohttp
 import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 
 from Celery_app.celeryapp import app
+
 from VeiSearch.settings import FROM_ADDR,EMAIL_PASSWORD
 from proxy_spider.proxy_zdy import Proxy_zdy
 from proxy_spider.proxy_89ip import Proxy_89ip
 from proxy_spider.proxy_xici import Proxy_xici
-import asyncio
-import aiohttp
 
 
 

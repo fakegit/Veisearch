@@ -145,16 +145,14 @@ from celery.schedules import timedelta
 
 CELERYBEAT_SCHEDULE = {  # 定时器策略
     # 定时任务一：　每隔30s运行一次
-    u'测试定时器1': {
+    u'获取代理': {
         "task": "vei.tasks.getproxy",
-        # "schedule": crontab(minute=30, hour=0),  # or 'schedule':   timedelta(seconds=3),
         "schedule": timedelta(minutes=10),
         "args": (),
     },
-    u'测试定时器2': {
+    u'测试代理': {
         "task": "vei.tasks.proxytest",
-        # "schedule": crontab(minute=30, hour=0),  # or 'schedule':   timedelta(seconds=3),
-        "schedule": timedelta(minutes=10),
+        "schedule": timedelta(minutes=20),
         "args": (),
     },
 }
@@ -163,8 +161,8 @@ CELERYBEAT_SCHEDULE = {  # 定时器策略
 #############################
 
 # 邮件配置
-FROM_ADDR = "weibw162@gmail.com"
-EMAIL_PASSWORD = "v8686521"
+FROM_ADDR = "******" #邮箱账号
+EMAIL_PASSWORD = "*******" # 邮箱密码
 EMAIL_SUBJECT = "微搜索"
 
 # 允许session存queryset对象

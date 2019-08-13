@@ -2,9 +2,11 @@ import importlib
 import json
 import random
 from io import BytesIO
+
 from PIL import Image, ImageDraw, ImageFont
 from django.shortcuts import render, HttpResponse
 from django.db.models import Sum, Count
+
 from .models import Spider_type, Spider, Comments, Spider_Error, Proxy, Broadcast, Shuffling, Search
 from .tasks import comments_send_email
 
@@ -77,8 +79,6 @@ def index(request):
 def upload(request):
     """
     上传页
-    :param request:
-    :return:
     """
     if "spider_type_list" in request.session:
         spider_type_list = request.session["spider_type_list"]
@@ -244,8 +244,6 @@ def scriptdetail(request, script_id):
 def script_test(request, script_id):
     """
     脚本测试
-    :param request:
-    :return:
     """
     wd = ''
     if request.is_ajax():
@@ -261,7 +259,6 @@ def script_test(request, script_id):
         spider_error.spider = spider
         spider_error.error_content = repr(e)
         spider_error.save()
-    # result = "测试成功"
 
     return HttpResponse(json.dumps(result))
 
@@ -269,9 +266,6 @@ def script_test(request, script_id):
 def comments(request, script_id):
     """
     评论
-    :param request:
-    :param script_id:
-    :return:
     """
     spider = Spider.objects.filter(pk=script_id).first()
     comments_name = ''
@@ -428,9 +422,6 @@ def getproxy(request):
     for proxy in proxy_q_list:
         proxy_list.append("http://"+proxy.proxy_ip)
     return HttpResponse(json.dumps(list(set(proxy_list))))
-
-    # Proxy.objects.all().delete()
-
 
 
 def veisearch(request):
