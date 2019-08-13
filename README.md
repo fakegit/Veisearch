@@ -2,7 +2,7 @@
 我们不生产资源，我们 不存储资源，我们也不是资源搬运工。
 
 ### 项目演示地址
-+ 项目演示地址：[http://www.veisearch.com/](http://www.veisearch.com/)
++ 项目演示地址：[http://www.veisearch.com/](http://www.veisearch.com/)/
 仅界面演示，上传脚本并未执行
 + 开发者后台地址：[http://www.veisearch.com/pro/](http://www.veisearch.com/pro/)
 + 网站后台地址：[http://www.veisearch.com/admin/](http://www.veisearch.com/admin/)
