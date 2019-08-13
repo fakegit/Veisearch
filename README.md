@@ -38,6 +38,12 @@
       }
     ```
 
+### 脚本示例
++ [80s电影网](https://github.com/Weibw162/Veisearch/blob/master/media/spider_files/Spider_80s.py)  
+使用requests+threading实现多线程并发爬取
++ [80s电影网](https://github.com/Weibw162/Veisearch/blob/master/media/spider_files/Spider_80s_t.py)  
+使用asyncio+aiohttp实现多协程并发爬取
+
 ### 网站页面展示
 + 搜索页（PC端）  
 ![](https://github.com/Weibw162/Veisearch/blob/master/readmeimg/index_pc.PNG)
