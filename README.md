@@ -24,18 +24,18 @@
     - 代理爬取。我们设定每10分钟爬取一批代理并存入数据库。
     - 测试代理。我们设定每20分钟检测所有库中ip代理。
     ```python
-      CELERYBEAT_SCHEDULE = {
-    u'获取代理': {
-        "task": "vei.tasks.getproxy",
-        "schedule": timedelta(minutes=10),
-        "args": (),
-    },
-    u'测试代理': {
-        "task": "vei.tasks.proxytest",
-        "schedule": timedelta(minutes=10),
-        "args": (),
-    },
-  }
+          CELERYBEAT_SCHEDULE = {
+        u'获取代理': {
+            "task": "vei.tasks.getproxy",
+            "schedule": timedelta(minutes=10),
+            "args": (),
+        },
+        u'测试代理': {
+            "task": "vei.tasks.proxytest",
+            "schedule": timedelta(minutes=10),
+            "args": (),
+        },
+      }
     ```
 
 ### 网站页面展示
