@@ -37,7 +37,10 @@
         },
       }
     ```
-
+### 代理脚本示例
++ [89免费代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_89ip.py)、[官网地址](http://www.89ip.cn/)
++ [西刺代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_xici.py)、[官网地址](https://www.xicidaili.com/)
++ [站大爷代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_zdy.py)、[官网地址](http://ip.zdaye.com/)
 ### 脚本示例
 + [80s电影网](https://github.com/Weibw162/Veisearch/blob/master/media/spider_files/Spider_80s.py)  
 使用requests+threading实现多线程并发爬取
