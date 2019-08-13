@@ -3,7 +3,7 @@
 
 ### 项目演示地址
 + 项目演示地址：[http://www.veisearch.com/](http://www.veisearch.com/)  
-仅界面演示，上传脚本并未执行。由于并未找到可靠的免费代理池，而我们爬取的网站对访问限制比较严重，所以多次尝试后最终放弃在服务器上运行，不过本地运行完全可以。
+仅界面演示，上传脚本并未执行。由于并未找到可靠的免费代理池，而我写脚本爬取的网站对访问限制比较严重，所以多次尝试后最终放弃在服务器上运行，不过本地运行完全可以。
 + 开发者后台地址：[http://www.veisearch.com/pro/](http://www.veisearch.com/pro/)  
 用户可以在后台开发者页面浏览其他用户上传的脚本，并对脚本进行相应的测试，评论，点赞等操作。
 + 网站后台地址：[http://www.veisearch.com/admin/](http://www.veisearch.com/admin/)  
@@ -38,9 +38,9 @@
       }
     ```
 ### 代理脚本示例
-+ [89免费代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_89ip.py)、[官网地址](http://www.89ip.cn/)
-+ [西刺代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_xici.py)、[官网地址](https://www.xicidaili.com/)
-+ [站大爷代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_zdy.py)、[官网地址](http://ip.zdaye.com/)
++ [89免费代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_89ip.py)--->[官网地址](http://www.89ip.cn/)
++ [西刺代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_xici.py)--->[官网地址](https://www.xicidaili.com/)
++ [站大爷代理](https://github.com/Weibw162/Veisearch/blob/master/proxy_spider/proxy_zdy.py)--->[官网地址](http://ip.zdaye.com/)
 ### 脚本示例
 + [80s电影网](https://github.com/Weibw162/Veisearch/blob/master/media/spider_files/Spider_80s.py)  
 使用requests+threading实现多线程并发爬取
